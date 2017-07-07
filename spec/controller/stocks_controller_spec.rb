@@ -3,7 +3,11 @@ require 'rails_helper'
 RSpec.describe StocksController, type: :controller do
 
   describe "GET /stocks/" do
-    it "should return list with stocks"
+    FactoryGirl.build(:stock)
+
+    it "should return list with stocks" do
+      expect(response).to have_http_status(200)
+    end
   end
 
   describe "POST /stocks/" do
@@ -14,9 +18,9 @@ RSpec.describe StocksController, type: :controller do
     context "with invalid data" do
       it "should return 422 and fail to save" do
 
-        params = { name: "invalid", bearer: "invalid", value: 19.39, currency: "EUR" }
+        params = { stock: { name: "invalid", bearer: "invalid", value_cents: 1939, currency: "EUR"} }
 
-        get :create, method: :post, params: params
+        post :create, params: params
 
         expect(response).to have_http_status(422)
         expect(JSON.parse(response.body)).to eq({"error"=>{"name"=>["is invalid"], "bearer"=>["is invalid"]}})
