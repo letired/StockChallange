@@ -13,6 +13,11 @@ RSpec.describe Stock, type: :model do
       expect(subject).to_not be_valid
     end
 
+    it "is not valid with the name 'invalid'" do
+      subject.name = "invalid"
+      expect(subject).to_not be_valid
+    end
+
     it "is not valid without a bearer" do
       subject.bearer = nil
       expect(subject).to_not be_valid

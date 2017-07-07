@@ -13,6 +13,11 @@ RSpec.describe Bearer, type: :model do
       expect(subject).to_not be_valid
     end
 
+    it "is not valid with the name 'invalid'" do
+      subject.name = "invalid"
+      expect(subject).to_not be_valid
+    end
+
     it "is unique by name" do
       FactoryGirl.create(:bearer)
       expect(subject).to_not be_valid

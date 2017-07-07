@@ -4,7 +4,6 @@ RSpec.describe MarketPrice, type: :model do
   subject { FactoryGirl.build(:market_price) }
 
   context "Validations" do
-
     it "has a valid factory" do
       expect(subject).to be_valid
     end
