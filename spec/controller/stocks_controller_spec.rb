@@ -3,14 +3,12 @@ require 'rails_helper'
 RSpec.describe StocksController, type: :controller do
 
   describe "GET /stocks/" do
-    it "should return list with stocks" do
-    end
+    it "should return list with stocks"
   end
 
   describe "POST /stocks/" do
     context "with valid data" do
-      it "should return stock and 200 OK" do
-      end
+      it "should return stock and 200 OK"
     end
 
     context "with invalid data" do
@@ -32,25 +30,21 @@ RSpec.describe StocksController, type: :controller do
 
   describe "PATCH /stocks/:id" do
     context "with different bearer" do
-      it "should create new bearer but keep market price" do
-      end
+      it "should create new bearer but keep market price"
     end
 
     context "with different market price" do
-      it "should create new market price but keep bearer" do
-      end
+      it "should create new market price but keep bearer"
     end
 
     context "with existing bearer" do
-      it "should reference existing bearer to stock" do
-      end
+      it "should reference existing bearer to stock"
     end
   end
 
   describe "DELETE /stocks/:id" do
     context "with different bearer" do
-      it "should create new bearer but keep market price" do
-      end
+      it "should create new bearer but keep market price"
     end
   end
 
