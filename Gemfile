@@ -35,6 +35,9 @@ gem 'jbuilder', '~> 2.5'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+# gem for soft delete
+gem "paranoia", "~> 2.2"
+
 gem 'money-rails'
 gem 'annotate'
 
