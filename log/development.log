@@ -1595,3 +1595,2141 @@ Migrating to AddDeletedAtToStocks (20170709161829)
   [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
   [1m[35mSQL (0.2ms)[0m  [1m[33mUPDATE "stocks" SET "deleted_at" = NULL, "updated_at" = '2017-07-09 16:24:08.837570' WHERE "stocks"."id" = ?[0m  [["id", 5]]
   [1m[35m (8.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mStock Load (0.1ms)[0m  [1m[34mSELECT  "stocks".* FROM "stocks" WHERE "stocks"."deleted_at" IS NULL ORDER BY "stocks"."id" DESC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mMarketPrice Load (0.1ms)[0m  [1m[34mSELECT  "market_prices".* FROM "market_prices" WHERE "market_prices"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mMarketPrice Load (0.1ms)[0m  [1m[34mSELECT  "market_prices".* FROM "market_prices" WHERE "market_prices"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mStock Load (0.2ms)[0m  [1m[34mSELECT "stocks".* FROM "stocks" WHERE "stocks"."deleted_at" IS NULL AND "stocks"."market_price_id" = ?[0m  [["market_price_id", 3]]
+Started POST "/stocks" for 127.0.0.1 at 2017-07-09 19:26:32 +0200
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by StocksController#create as JSON
+  Parameters: {"bearer_name"=>"cool", "stock"=>{}}
+Completed 400 Bad Request in 12ms (ActiveRecord: 0.7ms)
+
+
+  
+ActionController::ParameterMissing (param is missing or the value is empty: stock):
+  
+app/controllers/stocks_controller.rb:24:in `stock_params'
+app/controllers/stocks_controller.rb:10:in `create'
+  Rendering /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout
+  Rendering /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_source.html.erb
+  Rendered /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_source.html.erb (3.3ms)
+  Rendering /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb
+  Rendered /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.8ms)
+  Rendering /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb
+  Rendered /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.1ms)
+  Rendered /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (29.1ms)
+Started POST "/stocks" for 127.0.0.1 at 2017-07-09 19:27:01 +0200
+Error occurred while parsing request parameters.
+Contents:
+
+{"stock":{"bearer_name":"cool"}
+  
+ActionDispatch::ParamsParser::ParseError (822: unexpected token at '{"stock":{"bearer_name":"cool"}'):
+  
+actionpack (5.0.3) lib/action_dispatch/http/parameters.rb:88:in `rescue in parse_formatted_parameters'
+actionpack (5.0.3) lib/action_dispatch/http/parameters.rb:82:in `parse_formatted_parameters'
+actionpack (5.0.3) lib/action_dispatch/http/request.rb:354:in `block in POST'
+rack (2.0.2) lib/rack/request.rb:57:in `fetch'
+rack (2.0.2) lib/rack/request.rb:57:in `fetch_header'
+actionpack (5.0.3) lib/action_dispatch/http/request.rb:353:in `POST'
+actionpack (5.0.3) lib/action_controller/metal/params_wrapper.rb:282:in `_wrapper_enabled?'
+actionpack (5.0.3) lib/action_controller/metal/params_wrapper.rb:231:in `process_action'
+activerecord (5.0.3) lib/active_record/railties/controller_runtime.rb:18:in `process_action'
+actionpack (5.0.3) lib/abstract_controller/base.rb:126:in `process'
+actionview (5.0.3) lib/action_view/rendering.rb:30:in `process'
+actionpack (5.0.3) lib/action_controller/metal.rb:190:in `dispatch'
+actionpack (5.0.3) lib/action_controller/metal.rb:262:in `dispatch'
+actionpack (5.0.3) lib/action_dispatch/routing/route_set.rb:50:in `dispatch'
+actionpack (5.0.3) lib/action_dispatch/routing/route_set.rb:32:in `serve'
+actionpack (5.0.3) lib/action_dispatch/journey/router.rb:39:in `block in serve'
+actionpack (5.0.3) lib/action_dispatch/journey/router.rb:26:in `each'
+actionpack (5.0.3) lib/action_dispatch/journey/router.rb:26:in `serve'
+actionpack (5.0.3) lib/action_dispatch/routing/route_set.rb:725:in `call'
+rack (2.0.2) lib/rack/etag.rb:25:in `call'
+rack (2.0.2) lib/rack/conditional_get.rb:38:in `call'
+rack (2.0.2) lib/rack/head.rb:12:in `call'
+rack (2.0.2) lib/rack/session/abstract/id.rb:232:in `context'
+rack (2.0.2) lib/rack/session/abstract/id.rb:226:in `call'
+actionpack (5.0.3) lib/action_dispatch/middleware/cookies.rb:613:in `call'
+activerecord (5.0.3) lib/active_record/migration.rb:553:in `call'
+actionpack (5.0.3) lib/action_dispatch/middleware/callbacks.rb:38:in `block in call'
+activesupport (5.0.3) lib/active_support/callbacks.rb:97:in `__run_callbacks__'
+activesupport (5.0.3) lib/active_support/callbacks.rb:750:in `_run_call_callbacks'
+activesupport (5.0.3) lib/active_support/callbacks.rb:90:in `run_callbacks'
+actionpack (5.0.3) lib/action_dispatch/middleware/callbacks.rb:36:in `call'
+actionpack (5.0.3) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.0.3) lib/action_dispatch/middleware/remote_ip.rb:79:in `call'
+actionpack (5.0.3) lib/action_dispatch/middleware/debug_exceptions.rb:49:in `call'
+web-console (3.5.1) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.5.1) lib/web_console/middleware.rb:28:in `block in call'
+web-console (3.5.1) lib/web_console/middleware.rb:18:in `catch'
+web-console (3.5.1) lib/web_console/middleware.rb:18:in `call'
+actionpack (5.0.3) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.0.3) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.0.3) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.0.3) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.0.3) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.0.3) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.0.3) lib/rails/rack/logger.rb:24:in `call'
+sprockets-rails (3.2.0) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (5.0.3) lib/action_dispatch/middleware/request_id.rb:24:in `call'
+rack (2.0.2) lib/rack/method_override.rb:22:in `call'
+rack (2.0.2) lib/rack/runtime.rb:22:in `call'
+activesupport (5.0.3) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+actionpack (5.0.3) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.0.3) lib/action_dispatch/middleware/static.rb:136:in `call'
+rack (2.0.2) lib/rack/sendfile.rb:111:in `call'
+railties (5.0.3) lib/rails/engine.rb:522:in `call'
+puma (3.8.2) lib/puma/configuration.rb:224:in `call'
+puma (3.8.2) lib/puma/server.rb:600:in `handle_request'
+puma (3.8.2) lib/puma/server.rb:435:in `process_client'
+puma (3.8.2) lib/puma/server.rb:299:in `block in run'
+puma (3.8.2) lib/puma/thread_pool.rb:120:in `block in spawn_thread'
+  Rendering /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout
+  Rendering /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_source.html.erb
+  Rendered /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_source.html.erb (2.0ms)
+  Rendering /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb
+  Rendered /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.0ms)
+  Rendering /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb
+  Rendered /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.7ms)
+  Rendered /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (17.6ms)
+Started POST "/stocks" for 127.0.0.1 at 2017-07-09 19:27:32 +0200
+Error occurred while parsing request parameters.
+Contents:
+
+{"stock":{"name":"cool"}
+  
+ActionDispatch::ParamsParser::ParseError (822: unexpected token at '{"stock":{"name":"cool"}'):
+  
+actionpack (5.0.3) lib/action_dispatch/http/parameters.rb:88:in `rescue in parse_formatted_parameters'
+actionpack (5.0.3) lib/action_dispatch/http/parameters.rb:82:in `parse_formatted_parameters'
+actionpack (5.0.3) lib/action_dispatch/http/request.rb:354:in `block in POST'
+rack (2.0.2) lib/rack/request.rb:57:in `fetch'
+rack (2.0.2) lib/rack/request.rb:57:in `fetch_header'
+actionpack (5.0.3) lib/action_dispatch/http/request.rb:353:in `POST'
+actionpack (5.0.3) lib/action_controller/metal/params_wrapper.rb:282:in `_wrapper_enabled?'
+actionpack (5.0.3) lib/action_controller/metal/params_wrapper.rb:231:in `process_action'
+activerecord (5.0.3) lib/active_record/railties/controller_runtime.rb:18:in `process_action'
+actionpack (5.0.3) lib/abstract_controller/base.rb:126:in `process'
+actionview (5.0.3) lib/action_view/rendering.rb:30:in `process'
+actionpack (5.0.3) lib/action_controller/metal.rb:190:in `dispatch'
+actionpack (5.0.3) lib/action_controller/metal.rb:262:in `dispatch'
+actionpack (5.0.3) lib/action_dispatch/routing/route_set.rb:50:in `dispatch'
+actionpack (5.0.3) lib/action_dispatch/routing/route_set.rb:32:in `serve'
+actionpack (5.0.3) lib/action_dispatch/journey/router.rb:39:in `block in serve'
+actionpack (5.0.3) lib/action_dispatch/journey/router.rb:26:in `each'
+actionpack (5.0.3) lib/action_dispatch/journey/router.rb:26:in `serve'
+actionpack (5.0.3) lib/action_dispatch/routing/route_set.rb:725:in `call'
+rack (2.0.2) lib/rack/etag.rb:25:in `call'
+rack (2.0.2) lib/rack/conditional_get.rb:38:in `call'
+rack (2.0.2) lib/rack/head.rb:12:in `call'
+rack (2.0.2) lib/rack/session/abstract/id.rb:232:in `context'
+rack (2.0.2) lib/rack/session/abstract/id.rb:226:in `call'
+actionpack (5.0.3) lib/action_dispatch/middleware/cookies.rb:613:in `call'
+activerecord (5.0.3) lib/active_record/migration.rb:553:in `call'
+actionpack (5.0.3) lib/action_dispatch/middleware/callbacks.rb:38:in `block in call'
+activesupport (5.0.3) lib/active_support/callbacks.rb:97:in `__run_callbacks__'
+activesupport (5.0.3) lib/active_support/callbacks.rb:750:in `_run_call_callbacks'
+activesupport (5.0.3) lib/active_support/callbacks.rb:90:in `run_callbacks'
+actionpack (5.0.3) lib/action_dispatch/middleware/callbacks.rb:36:in `call'
+actionpack (5.0.3) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.0.3) lib/action_dispatch/middleware/remote_ip.rb:79:in `call'
+actionpack (5.0.3) lib/action_dispatch/middleware/debug_exceptions.rb:49:in `call'
+web-console (3.5.1) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.5.1) lib/web_console/middleware.rb:28:in `block in call'
+web-console (3.5.1) lib/web_console/middleware.rb:18:in `catch'
+web-console (3.5.1) lib/web_console/middleware.rb:18:in `call'
+actionpack (5.0.3) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.0.3) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.0.3) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.0.3) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.0.3) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.0.3) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.0.3) lib/rails/rack/logger.rb:24:in `call'
+sprockets-rails (3.2.0) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (5.0.3) lib/action_dispatch/middleware/request_id.rb:24:in `call'
+rack (2.0.2) lib/rack/method_override.rb:22:in `call'
+rack (2.0.2) lib/rack/runtime.rb:22:in `call'
+activesupport (5.0.3) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+actionpack (5.0.3) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.0.3) lib/action_dispatch/middleware/static.rb:136:in `call'
+rack (2.0.2) lib/rack/sendfile.rb:111:in `call'
+railties (5.0.3) lib/rails/engine.rb:522:in `call'
+puma (3.8.2) lib/puma/configuration.rb:224:in `call'
+puma (3.8.2) lib/puma/server.rb:600:in `handle_request'
+puma (3.8.2) lib/puma/server.rb:435:in `process_client'
+puma (3.8.2) lib/puma/server.rb:299:in `block in run'
+puma (3.8.2) lib/puma/thread_pool.rb:120:in `block in spawn_thread'
+  Rendering /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout
+  Rendering /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_source.html.erb
+  Rendered /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_source.html.erb (2.3ms)
+  Rendering /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb
+  Rendered /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (0.9ms)
+  Rendering /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb
+  Rendered /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.6ms)
+  Rendered /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (16.4ms)
+Started POST "/stocks" for 127.0.0.1 at 2017-07-09 19:27:48 +0200
+Processing by StocksController#create as JSON
+  Parameters: {"name"=>"cool", "stock"=>{"name"=>"cool"}}
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[31mrollback transaction[0m
+Completed 422 Unprocessable Entity in 39ms (Views: 0.3ms | ActiveRecord: 0.4ms)
+
+
+Started POST "/stocks" for 127.0.0.1 at 2017-07-09 19:28:16 +0200
+Processing by StocksController#create as JSON
+  Parameters: {"name"=>"cool", "stock"=>{"name"=>"cool"}}
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[31mrollback transaction[0m
+Completed 422 Unprocessable Entity in 4ms (Views: 0.2ms | ActiveRecord: 0.2ms)
+
+
+Started POST "/stocks" for 127.0.0.1 at 2017-07-09 19:28:48 +0200
+Processing by StocksController#create as JSON
+  Parameters: {"name"=>"cool", "bearer_name"=>"spencer", "stock"=>{"name"=>"cool"}}
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[31mrollback transaction[0m
+Completed 422 Unprocessable Entity in 3ms (Views: 0.1ms | ActiveRecord: 0.1ms)
+
+
+Started POST "/stocks" for 127.0.0.1 at 2017-07-09 19:29:19 +0200
+Processing by StocksController#create as JSON
+  Parameters: {"stock"=>{}}
+Completed 400 Bad Request in 0ms (ActiveRecord: 0.0ms)
+
+
+  
+ActionController::ParameterMissing (param is missing or the value is empty: stock):
+  
+app/controllers/stocks_controller.rb:24:in `stock_params'
+app/controllers/stocks_controller.rb:10:in `create'
+  Rendering /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout
+  Rendering /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_source.html.erb
+  Rendered /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_source.html.erb (2.3ms)
+  Rendering /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb
+  Rendered /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.1ms)
+  Rendering /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb
+  Rendered /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.8ms)
+  Rendered /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (17.2ms)
+Started POST "/stocks" for 127.0.0.1 at 2017-07-09 19:29:37 +0200
+Processing by StocksController#create as JSON
+  Parameters: {"name"=>"spencer", "stock"=>{"name"=>"spencer"}}
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[31mrollback transaction[0m
+Completed 422 Unprocessable Entity in 3ms (Views: 0.2ms | ActiveRecord: 0.1ms)
+
+
+  [1m[36mStock Load (0.2ms)[0m  [1m[34mSELECT  "stocks".* FROM "stocks" WHERE "stocks"."deleted_at" IS NULL ORDER BY "stocks"."id" DESC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mStock Load (0.1ms)[0m  [1m[34mSELECT  "stocks".* FROM "stocks" WHERE "stocks"."deleted_at" IS NULL ORDER BY "stocks"."id" DESC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mBearer Load (0.1ms)[0m  [1m[34mSELECT  "bearers".* FROM "bearers" WHERE "bearers"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mBearer Load (0.1ms)[0m  [1m[34mSELECT  "bearers".* FROM "bearers" ORDER BY "bearers"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mBearer Load (0.3ms)[0m  [1m[34mSELECT  "bearers".* FROM "bearers" WHERE "bearers"."bearer_name" = ? LIMIT ?[0m  [["bearer_name", "Billy Bob"], ["LIMIT", 1]]
+  [1m[36mBearer Load (0.4ms)[0m  [1m[34mSELECT  "bearers".* FROM "bearers" WHERE "bearers"."bearer_name" = ? LIMIT ?[0m  [["bearer_name", "Billy Bob"], ["LIMIT", 1]]
+  [1m[36mStock Load (0.2ms)[0m  [1m[34mSELECT  "stocks".* FROM "stocks" WHERE "stocks"."deleted_at" IS NULL ORDER BY "stocks"."id" DESC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mBearer Load (0.1ms)[0m  [1m[34mSELECT  "bearers".* FROM "bearers" WHERE "bearers"."name" = ? LIMIT ?[0m  [["name", "Billy Bob"], ["LIMIT", 1]]
+  [1m[36mBearer Load (0.3ms)[0m  [1m[34mSELECT  "bearers".* FROM "bearers" WHERE "bearers"."name" = ? LIMIT ?[0m  [["name", "Naomi"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mBearer Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "bearers" WHERE "bearers"."name" = ? LIMIT ?[0m  [["name", "Naomi"], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "bearers" ("name", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["name", "Naomi"], ["created_at", "2017-07-09 17:33:03.706527"], ["updated_at", "2017-07-09 17:33:03.706527"]]
+  [1m[35m (8.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mBearer Load (0.1ms)[0m  [1m[34mSELECT  "bearers".* FROM "bearers" WHERE "bearers"."name" = ? LIMIT ?[0m  [["name", "bobby"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mBearer Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "bearers" WHERE "bearers"."name" = ? LIMIT ?[0m  [["name", "bobby"], ["LIMIT", 1]]
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "bearers" ("name", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["name", "bobby"], ["created_at", "2017-07-09 17:33:29.864317"], ["updated_at", "2017-07-09 17:33:29.864317"]]
+  [1m[35m (6.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mBearer Load (0.1ms)[0m  [1m[34mSELECT  "bearers".* FROM "bearers" WHERE "bearers"."name" = ? LIMIT ?[0m  [["name", "Billy Bob"], ["LIMIT", 1]]
+Started POST "/stocks" for 127.0.0.1 at 2017-07-09 19:35:17 +0200
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by StocksController#create as JSON
+  Parameters: {"name"=>"spencer", "stock"=>{"name"=>"spencer"}}
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[31mrollback transaction[0m
+Completed 422 Unprocessable Entity in 22ms (Views: 0.2ms | ActiveRecord: 0.6ms)
+
+
+Started POST "/stocks" for 127.0.0.1 at 2017-07-09 19:35:36 +0200
+Processing by StocksController#create as JSON
+  Parameters: {"name"=>"spencer", "bearer_name"=>"Billy Bob", "stock"=>{"name"=>"spencer"}}
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[31mrollback transaction[0m
+Completed 422 Unprocessable Entity in 3ms (Views: 0.2ms | ActiveRecord: 0.1ms)
+
+
+Started POST "/stocks" for 127.0.0.1 at 2017-07-09 19:36:57 +0200
+Error occurred while parsing request parameters.
+Contents:
+
+{"name":"spencer"}
+{"bearer_name":"Billy Bob"}
+  
+ActionDispatch::ParamsParser::ParseError (822: unexpected token at '{"bearer_name":"Billy Bob"}'):
+  
+actionpack (5.0.3) lib/action_dispatch/http/parameters.rb:88:in `rescue in parse_formatted_parameters'
+actionpack (5.0.3) lib/action_dispatch/http/parameters.rb:82:in `parse_formatted_parameters'
+actionpack (5.0.3) lib/action_dispatch/http/request.rb:354:in `block in POST'
+rack (2.0.2) lib/rack/request.rb:57:in `fetch'
+rack (2.0.2) lib/rack/request.rb:57:in `fetch_header'
+actionpack (5.0.3) lib/action_dispatch/http/request.rb:353:in `POST'
+actionpack (5.0.3) lib/action_controller/metal/params_wrapper.rb:282:in `_wrapper_enabled?'
+actionpack (5.0.3) lib/action_controller/metal/params_wrapper.rb:231:in `process_action'
+activerecord (5.0.3) lib/active_record/railties/controller_runtime.rb:18:in `process_action'
+actionpack (5.0.3) lib/abstract_controller/base.rb:126:in `process'
+actionview (5.0.3) lib/action_view/rendering.rb:30:in `process'
+actionpack (5.0.3) lib/action_controller/metal.rb:190:in `dispatch'
+actionpack (5.0.3) lib/action_controller/metal.rb:262:in `dispatch'
+actionpack (5.0.3) lib/action_dispatch/routing/route_set.rb:50:in `dispatch'
+actionpack (5.0.3) lib/action_dispatch/routing/route_set.rb:32:in `serve'
+actionpack (5.0.3) lib/action_dispatch/journey/router.rb:39:in `block in serve'
+actionpack (5.0.3) lib/action_dispatch/journey/router.rb:26:in `each'
+actionpack (5.0.3) lib/action_dispatch/journey/router.rb:26:in `serve'
+actionpack (5.0.3) lib/action_dispatch/routing/route_set.rb:725:in `call'
+rack (2.0.2) lib/rack/etag.rb:25:in `call'
+rack (2.0.2) lib/rack/conditional_get.rb:38:in `call'
+rack (2.0.2) lib/rack/head.rb:12:in `call'
+rack (2.0.2) lib/rack/session/abstract/id.rb:232:in `context'
+rack (2.0.2) lib/rack/session/abstract/id.rb:226:in `call'
+actionpack (5.0.3) lib/action_dispatch/middleware/cookies.rb:613:in `call'
+activerecord (5.0.3) lib/active_record/migration.rb:553:in `call'
+actionpack (5.0.3) lib/action_dispatch/middleware/callbacks.rb:38:in `block in call'
+activesupport (5.0.3) lib/active_support/callbacks.rb:97:in `__run_callbacks__'
+activesupport (5.0.3) lib/active_support/callbacks.rb:750:in `_run_call_callbacks'
+activesupport (5.0.3) lib/active_support/callbacks.rb:90:in `run_callbacks'
+actionpack (5.0.3) lib/action_dispatch/middleware/callbacks.rb:36:in `call'
+actionpack (5.0.3) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.0.3) lib/action_dispatch/middleware/remote_ip.rb:79:in `call'
+actionpack (5.0.3) lib/action_dispatch/middleware/debug_exceptions.rb:49:in `call'
+web-console (3.5.1) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.5.1) lib/web_console/middleware.rb:28:in `block in call'
+web-console (3.5.1) lib/web_console/middleware.rb:18:in `catch'
+web-console (3.5.1) lib/web_console/middleware.rb:18:in `call'
+actionpack (5.0.3) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.0.3) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.0.3) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.0.3) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.0.3) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.0.3) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.0.3) lib/rails/rack/logger.rb:24:in `call'
+sprockets-rails (3.2.0) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (5.0.3) lib/action_dispatch/middleware/request_id.rb:24:in `call'
+rack (2.0.2) lib/rack/method_override.rb:22:in `call'
+rack (2.0.2) lib/rack/runtime.rb:22:in `call'
+activesupport (5.0.3) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+actionpack (5.0.3) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.0.3) lib/action_dispatch/middleware/static.rb:136:in `call'
+rack (2.0.2) lib/rack/sendfile.rb:111:in `call'
+railties (5.0.3) lib/rails/engine.rb:522:in `call'
+puma (3.8.2) lib/puma/configuration.rb:224:in `call'
+puma (3.8.2) lib/puma/server.rb:600:in `handle_request'
+puma (3.8.2) lib/puma/server.rb:435:in `process_client'
+puma (3.8.2) lib/puma/server.rb:299:in `block in run'
+puma (3.8.2) lib/puma/thread_pool.rb:120:in `block in spawn_thread'
+  Rendering /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout
+  Rendering /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_source.html.erb
+  Rendered /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_source.html.erb (1.9ms)
+  Rendering /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb
+  Rendered /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.0ms)
+  Rendering /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb
+  Rendered /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.8ms)
+  Rendered /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (27.3ms)
+Started POST "/stocks" for 127.0.0.1 at 2017-07-09 19:37:19 +0200
+Processing by StocksController#create as JSON
+  Parameters: {"name"=>"spencer", "stock"=>{"name"=>"spencer"}}
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[31mrollback transaction[0m
+Completed 422 Unprocessable Entity in 12ms (Views: 0.2ms | ActiveRecord: 0.8ms)
+
+
+  [1m[36mStock Load (0.1ms)[0m  [1m[34mSELECT  "stocks".* FROM "stocks" WHERE "stocks"."deleted_at" IS NULL ORDER BY "stocks"."id" DESC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mBearer Load (0.1ms)[0m  [1m[34mSELECT  "bearers".* FROM "bearers" WHERE "bearers"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mMarketPrice Load (0.1ms)[0m  [1m[34mSELECT  "market_prices".* FROM "market_prices" WHERE "market_prices"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mBearer Load (0.1ms)[0m  [1m[34mSELECT  "bearers".* FROM "bearers" WHERE "bearers"."name" = ? LIMIT ?[0m  [["name", "Billy Bob"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (1.0ms)[0m  [1m[32mINSERT INTO "stocks" ("name", "bearer_id", "market_price_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["name", "spencer"], ["bearer_id", 1], ["market_price_id", 3], ["created_at", "2017-07-09 17:39:21.575987"], ["updated_at", "2017-07-09 17:39:21.575987"]]
+  [1m[35m (7.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mBearer Load (0.1ms)[0m  [1m[34mSELECT  "bearers".* FROM "bearers" WHERE "bearers"."name" = ? LIMIT ?[0m  [["name", "Billy Bob"], ["LIMIT", 1]]
+  [1m[36mMarketPrice Load (0.1ms)[0m  [1m[34mSELECT  "market_prices".* FROM "market_prices" WHERE "market_prices"."value_cents" = ? LIMIT ?[0m  [["value_cents", 300], ["LIMIT", 1]]
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mMarketPrice Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "market_prices" WHERE "market_prices"."currency" IS NULL AND "market_prices"."value_cents" = ? LIMIT ?[0m  [["value_cents", 300], ["LIMIT", 1]]
+  [1m[35m (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mMarketPrice Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "market_prices" WHERE "market_prices"."currency" IS NULL AND "market_prices"."value_cents" = ? LIMIT ?[0m  [["value_cents", 300], ["LIMIT", 1]]
+  [1m[35mSQL (0.9ms)[0m  [1m[32mINSERT INTO "stocks" ("name", "bearer_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Georgie"], ["bearer_id", 1], ["created_at", "2017-07-09 17:42:24.441709"], ["updated_at", "2017-07-09 17:42:24.441709"]]
+  [1m[35m (7.7ms)[0m  [1m[36mcommit transaction[0m
+Started POST "/stocks" for 127.0.0.1 at 2017-07-09 19:44:11 +0200
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by StocksController#create as JSON
+  Parameters: {"name"=>"spencer", "bearer_name"=>"Billy Bob", "value_cents"=>"300", "stock"=>{"name"=>"spencer"}}
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[31mrollback transaction[0m
+Completed 422 Unprocessable Entity in 22ms (Views: 0.2ms | ActiveRecord: 0.6ms)
+
+
+Started POST "/stocks" for 127.0.0.1 at 2017-07-09 19:44:30 +0200
+Processing by StocksController#create as JSON
+  Parameters: {"bearer_name"=>"Billy Bob", "value_cents"=>"300", "name"=>"spencer", "stock"=>{"name"=>"spencer"}}
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[31mrollback transaction[0m
+Completed 422 Unprocessable Entity in 3ms (Views: 0.2ms | ActiveRecord: 0.1ms)
+
+
+Started POST "/stocks" for 127.0.0.1 at 2017-07-09 19:45:57 +0200
+Processing by StocksController#create as JSON
+  Parameters: {"stock"=>{}}
+Completed 400 Bad Request in 0ms (ActiveRecord: 0.0ms)
+
+
+  
+ActionController::ParameterMissing (param is missing or the value is empty: stock):
+  
+app/controllers/stocks_controller.rb:25:in `stock_params'
+app/controllers/stocks_controller.rb:11:in `create'
+  Rendering /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout
+  Rendering /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_source.html.erb
+  Rendered /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_source.html.erb (2.1ms)
+  Rendering /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb
+  Rendered /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.1ms)
+  Rendering /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb
+  Rendered /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.7ms)
+  Rendered /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (20.3ms)
+Started POST "/stocks" for 127.0.0.1 at 2017-07-09 19:46:44 +0200
+Processing by StocksController#create as JSON
+  Parameters: {"bearer_name"=>"Bobby", "stock"=>{}}
+Completed 400 Bad Request in 0ms (ActiveRecord: 0.0ms)
+
+
+  
+ActionController::ParameterMissing (param is missing or the value is empty: stock):
+  
+app/controllers/stocks_controller.rb:25:in `stock_params'
+app/controllers/stocks_controller.rb:11:in `create'
+  Rendering /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout
+  Rendering /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_source.html.erb
+  Rendered /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_source.html.erb (1.9ms)
+  Rendering /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb
+  Rendered /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.1ms)
+  Rendering /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb
+  Rendered /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.8ms)
+  Rendered /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (17.2ms)
+Started POST "/stocks" for 127.0.0.1 at 2017-07-09 19:48:04 +0200
+Processing by StocksController#create as JSON
+  Parameters: {"name"=>"spencer", "bearer_name"=>"Billy Bob", "value_cents"=>"300"}
+Completed 400 Bad Request in 0ms (ActiveRecord: 0.0ms)
+
+
+  
+ActionController::ParameterMissing (param is missing or the value is empty: stock):
+  
+app/controllers/stocks_controller.rb:25:in `stock_params'
+app/controllers/stocks_controller.rb:11:in `create'
+  Rendering /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout
+  Rendering /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_source.html.erb
+  Rendered /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_source.html.erb (1.8ms)
+  Rendering /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb
+  Rendered /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.0ms)
+  Rendering /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb
+  Rendered /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.7ms)
+  Rendered /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (15.4ms)
+Started POST "/stocks" for 127.0.0.1 at 2017-07-09 19:48:28 +0200
+Processing by StocksController#create as JSON
+  Parameters: {"name"=>"spencer", "bearer_name"=>"Billy Bob", "value_cents"=>"300"}
+Completed 400 Bad Request in 0ms (ActiveRecord: 0.0ms)
+
+
+  
+ActionController::ParameterMissing (param is missing or the value is empty: stock):
+  
+app/controllers/stocks_controller.rb:25:in `stock_params'
+app/controllers/stocks_controller.rb:11:in `create'
+  Rendering /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout
+  Rendering /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_source.html.erb
+  Rendered /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_source.html.erb (1.8ms)
+  Rendering /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb
+  Rendered /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.0ms)
+  Rendering /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb
+  Rendered /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.9ms)
+  Rendered /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (16.0ms)
+Started POST "/stocks" for 127.0.0.1 at 2017-07-09 19:48:49 +0200
+Processing by StocksController#create as JSON
+  Parameters: {"stocks"=>{":name"=>"spencer"}, "bearer_name"=>"Billy Bob", "value_cents"=>"300"}
+Completed 400 Bad Request in 0ms (ActiveRecord: 0.0ms)
+
+
+  
+ActionController::ParameterMissing (param is missing or the value is empty: stock):
+  
+app/controllers/stocks_controller.rb:25:in `stock_params'
+app/controllers/stocks_controller.rb:11:in `create'
+  Rendering /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout
+  Rendering /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_source.html.erb
+  Rendered /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_source.html.erb (1.8ms)
+  Rendering /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb
+  Rendered /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.0ms)
+  Rendering /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb
+  Rendered /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.6ms)
+  Rendered /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (15.7ms)
+Started POST "/stocks" for 127.0.0.1 at 2017-07-09 19:49:15 +0200
+Processing by StocksController#create as JSON
+  Parameters: {"stock"=>{"name"=>"spencer", "bearer_name"=>"Billy Bob"}, "value_cents"=>"300"}
+  [1m[36mBearer Load (0.1ms)[0m  [1m[34mSELECT  "bearers".* FROM "bearers" WHERE "bearers"."name" = ? LIMIT ?[0m  [["name", "Billy Bob"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[31mrollback transaction[0m
+Completed 422 Unprocessable Entity in 7ms (Views: 0.2ms | ActiveRecord: 0.7ms)
+
+
+Started POST "/stocks" for 127.0.0.1 at 2017-07-09 19:49:40 +0200
+Processing by StocksController#create as JSON
+  Parameters: {"stock"=>{"name"=>"spencer", "bearer_name"=>"Billy Bob", "value_cents"=>"300"}}
+  [1m[36mBearer Load (0.1ms)[0m  [1m[34mSELECT  "bearers".* FROM "bearers" WHERE "bearers"."name" = ? LIMIT ?[0m  [["name", "Billy Bob"], ["LIMIT", 1]]
+  [1m[36mMarketPrice Load (0.1ms)[0m  [1m[34mSELECT  "market_prices".* FROM "market_prices" WHERE "market_prices"."value_cents" = ? LIMIT ?[0m  [["value_cents", 300], ["LIMIT", 1]]
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mMarketPrice Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "market_prices" WHERE "market_prices"."currency" IS NULL AND "market_prices"."value_cents" = ? LIMIT ?[0m  [["value_cents", 300], ["LIMIT", 1]]
+  [1m[35m (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mMarketPrice Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "market_prices" WHERE "market_prices"."currency" IS NULL AND "market_prices"."value_cents" = ? LIMIT ?[0m  [["value_cents", 300], ["LIMIT", 1]]
+  [1m[35mSQL (0.9ms)[0m  [1m[32mINSERT INTO "stocks" ("name", "bearer_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "spencer"], ["bearer_id", 1], ["created_at", "2017-07-09 17:49:40.721471"], ["updated_at", "2017-07-09 17:49:40.721471"]]
+  [1m[35m (7.9ms)[0m  [1m[36mcommit transaction[0m
+Completed 500 Internal Server Error in 27ms (ActiveRecord: 9.6ms)
+
+
+  
+ActionView::MissingTemplate (Missing template stocks/show, application/show with {:locale=>[:en], :formats=>[:json], :variants=>[], :handlers=>[:raw, :erb, :html, :builder, :ruby, :coffee, :jbuilder]}. Searched in:
+  * "/home/spencer/code/StockChallange/app/views"
+):
+  
+app/controllers/stocks_controller.rb:13:in `create'
+  Rendering /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/missing_template.html.erb within rescues/layout
+  Rendering /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_source.html.erb
+  Rendered /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_source.html.erb (5.6ms)
+  Rendering /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb
+  Rendered /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.9ms)
+  Rendering /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb
+  Rendered /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.2ms)
+  Rendered /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/missing_template.html.erb within rescues/layout (24.2ms)
+Started POST "/stocks" for 127.0.0.1 at 2017-07-09 19:52:59 +0200
+Error occurred while parsing request parameters.
+Contents:
+
+{
+"stock[name]":"spencer"
+"stock[bearer_name]":"Billy Bob"
+"stock[value_cents]":"300"
+}
+  
+ActionDispatch::ParamsParser::ParseError (822: unexpected token at '{
+"stock[name]":"spencer"
+"stock[bearer_name]":"Billy Bob"
+"stock[value_cents]":"300"
+}'):
+  
+actionpack (5.0.3) lib/action_dispatch/http/parameters.rb:88:in `rescue in parse_formatted_parameters'
+actionpack (5.0.3) lib/action_dispatch/http/parameters.rb:82:in `parse_formatted_parameters'
+actionpack (5.0.3) lib/action_dispatch/http/request.rb:354:in `block in POST'
+rack (2.0.2) lib/rack/request.rb:57:in `fetch'
+rack (2.0.2) lib/rack/request.rb:57:in `fetch_header'
+actionpack (5.0.3) lib/action_dispatch/http/request.rb:353:in `POST'
+actionpack (5.0.3) lib/action_controller/metal/params_wrapper.rb:282:in `_wrapper_enabled?'
+actionpack (5.0.3) lib/action_controller/metal/params_wrapper.rb:231:in `process_action'
+activerecord (5.0.3) lib/active_record/railties/controller_runtime.rb:18:in `process_action'
+actionpack (5.0.3) lib/abstract_controller/base.rb:126:in `process'
+actionview (5.0.3) lib/action_view/rendering.rb:30:in `process'
+actionpack (5.0.3) lib/action_controller/metal.rb:190:in `dispatch'
+actionpack (5.0.3) lib/action_controller/metal.rb:262:in `dispatch'
+actionpack (5.0.3) lib/action_dispatch/routing/route_set.rb:50:in `dispatch'
+actionpack (5.0.3) lib/action_dispatch/routing/route_set.rb:32:in `serve'
+actionpack (5.0.3) lib/action_dispatch/journey/router.rb:39:in `block in serve'
+actionpack (5.0.3) lib/action_dispatch/journey/router.rb:26:in `each'
+actionpack (5.0.3) lib/action_dispatch/journey/router.rb:26:in `serve'
+actionpack (5.0.3) lib/action_dispatch/routing/route_set.rb:725:in `call'
+rack (2.0.2) lib/rack/etag.rb:25:in `call'
+rack (2.0.2) lib/rack/conditional_get.rb:38:in `call'
+rack (2.0.2) lib/rack/head.rb:12:in `call'
+rack (2.0.2) lib/rack/session/abstract/id.rb:232:in `context'
+rack (2.0.2) lib/rack/session/abstract/id.rb:226:in `call'
+actionpack (5.0.3) lib/action_dispatch/middleware/cookies.rb:613:in `call'
+activerecord (5.0.3) lib/active_record/migration.rb:553:in `call'
+actionpack (5.0.3) lib/action_dispatch/middleware/callbacks.rb:38:in `block in call'
+activesupport (5.0.3) lib/active_support/callbacks.rb:97:in `__run_callbacks__'
+activesupport (5.0.3) lib/active_support/callbacks.rb:750:in `_run_call_callbacks'
+activesupport (5.0.3) lib/active_support/callbacks.rb:90:in `run_callbacks'
+actionpack (5.0.3) lib/action_dispatch/middleware/callbacks.rb:36:in `call'
+actionpack (5.0.3) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.0.3) lib/action_dispatch/middleware/remote_ip.rb:79:in `call'
+actionpack (5.0.3) lib/action_dispatch/middleware/debug_exceptions.rb:49:in `call'
+web-console (3.5.1) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.5.1) lib/web_console/middleware.rb:28:in `block in call'
+web-console (3.5.1) lib/web_console/middleware.rb:18:in `catch'
+web-console (3.5.1) lib/web_console/middleware.rb:18:in `call'
+actionpack (5.0.3) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.0.3) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.0.3) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.0.3) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.0.3) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.0.3) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.0.3) lib/rails/rack/logger.rb:24:in `call'
+sprockets-rails (3.2.0) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (5.0.3) lib/action_dispatch/middleware/request_id.rb:24:in `call'
+rack (2.0.2) lib/rack/method_override.rb:22:in `call'
+rack (2.0.2) lib/rack/runtime.rb:22:in `call'
+activesupport (5.0.3) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+actionpack (5.0.3) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.0.3) lib/action_dispatch/middleware/static.rb:136:in `call'
+rack (2.0.2) lib/rack/sendfile.rb:111:in `call'
+railties (5.0.3) lib/rails/engine.rb:522:in `call'
+puma (3.8.2) lib/puma/configuration.rb:224:in `call'
+puma (3.8.2) lib/puma/server.rb:600:in `handle_request'
+puma (3.8.2) lib/puma/server.rb:435:in `process_client'
+puma (3.8.2) lib/puma/server.rb:299:in `block in run'
+puma (3.8.2) lib/puma/thread_pool.rb:120:in `block in spawn_thread'
+  Rendering /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout
+  Rendering /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_source.html.erb
+  Rendered /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_source.html.erb (1.8ms)
+  Rendering /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb
+  Rendered /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.0ms)
+  Rendering /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb
+  Rendered /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.7ms)
+  Rendered /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (17.4ms)
+Started POST "/stocks" for 127.0.0.1 at 2017-07-09 19:53:46 +0200
+Error occurred while parsing request parameters.
+Contents:
+
+{"stock[name]":"spencer"
+"stock[bearer_name]":"Billy Bob"
+"stock[value_cents]":"300"}
+  
+ActionDispatch::ParamsParser::ParseError (822: unexpected token at '{"stock[name]":"spencer"
+"stock[bearer_name]":"Billy Bob"
+"stock[value_cents]":"300"}'):
+  
+actionpack (5.0.3) lib/action_dispatch/http/parameters.rb:88:in `rescue in parse_formatted_parameters'
+actionpack (5.0.3) lib/action_dispatch/http/parameters.rb:82:in `parse_formatted_parameters'
+actionpack (5.0.3) lib/action_dispatch/http/request.rb:354:in `block in POST'
+rack (2.0.2) lib/rack/request.rb:57:in `fetch'
+rack (2.0.2) lib/rack/request.rb:57:in `fetch_header'
+actionpack (5.0.3) lib/action_dispatch/http/request.rb:353:in `POST'
+actionpack (5.0.3) lib/action_controller/metal/params_wrapper.rb:282:in `_wrapper_enabled?'
+actionpack (5.0.3) lib/action_controller/metal/params_wrapper.rb:231:in `process_action'
+activerecord (5.0.3) lib/active_record/railties/controller_runtime.rb:18:in `process_action'
+actionpack (5.0.3) lib/abstract_controller/base.rb:126:in `process'
+actionview (5.0.3) lib/action_view/rendering.rb:30:in `process'
+actionpack (5.0.3) lib/action_controller/metal.rb:190:in `dispatch'
+actionpack (5.0.3) lib/action_controller/metal.rb:262:in `dispatch'
+actionpack (5.0.3) lib/action_dispatch/routing/route_set.rb:50:in `dispatch'
+actionpack (5.0.3) lib/action_dispatch/routing/route_set.rb:32:in `serve'
+actionpack (5.0.3) lib/action_dispatch/journey/router.rb:39:in `block in serve'
+actionpack (5.0.3) lib/action_dispatch/journey/router.rb:26:in `each'
+actionpack (5.0.3) lib/action_dispatch/journey/router.rb:26:in `serve'
+actionpack (5.0.3) lib/action_dispatch/routing/route_set.rb:725:in `call'
+rack (2.0.2) lib/rack/etag.rb:25:in `call'
+rack (2.0.2) lib/rack/conditional_get.rb:38:in `call'
+rack (2.0.2) lib/rack/head.rb:12:in `call'
+rack (2.0.2) lib/rack/session/abstract/id.rb:232:in `context'
+rack (2.0.2) lib/rack/session/abstract/id.rb:226:in `call'
+actionpack (5.0.3) lib/action_dispatch/middleware/cookies.rb:613:in `call'
+activerecord (5.0.3) lib/active_record/migration.rb:553:in `call'
+actionpack (5.0.3) lib/action_dispatch/middleware/callbacks.rb:38:in `block in call'
+activesupport (5.0.3) lib/active_support/callbacks.rb:97:in `__run_callbacks__'
+activesupport (5.0.3) lib/active_support/callbacks.rb:750:in `_run_call_callbacks'
+activesupport (5.0.3) lib/active_support/callbacks.rb:90:in `run_callbacks'
+actionpack (5.0.3) lib/action_dispatch/middleware/callbacks.rb:36:in `call'
+actionpack (5.0.3) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.0.3) lib/action_dispatch/middleware/remote_ip.rb:79:in `call'
+actionpack (5.0.3) lib/action_dispatch/middleware/debug_exceptions.rb:49:in `call'
+web-console (3.5.1) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.5.1) lib/web_console/middleware.rb:28:in `block in call'
+web-console (3.5.1) lib/web_console/middleware.rb:18:in `catch'
+web-console (3.5.1) lib/web_console/middleware.rb:18:in `call'
+actionpack (5.0.3) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.0.3) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.0.3) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.0.3) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.0.3) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.0.3) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.0.3) lib/rails/rack/logger.rb:24:in `call'
+sprockets-rails (3.2.0) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (5.0.3) lib/action_dispatch/middleware/request_id.rb:24:in `call'
+rack (2.0.2) lib/rack/method_override.rb:22:in `call'
+rack (2.0.2) lib/rack/runtime.rb:22:in `call'
+activesupport (5.0.3) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+actionpack (5.0.3) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.0.3) lib/action_dispatch/middleware/static.rb:136:in `call'
+rack (2.0.2) lib/rack/sendfile.rb:111:in `call'
+railties (5.0.3) lib/rails/engine.rb:522:in `call'
+puma (3.8.2) lib/puma/configuration.rb:224:in `call'
+puma (3.8.2) lib/puma/server.rb:600:in `handle_request'
+puma (3.8.2) lib/puma/server.rb:435:in `process_client'
+puma (3.8.2) lib/puma/server.rb:299:in `block in run'
+puma (3.8.2) lib/puma/thread_pool.rb:120:in `block in spawn_thread'
+  Rendering /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout
+  Rendering /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_source.html.erb
+  Rendered /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_source.html.erb (1.7ms)
+  Rendering /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb
+  Rendered /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (0.9ms)
+  Rendering /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb
+  Rendered /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.6ms)
+  Rendered /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (16.9ms)
+Started POST "/stocks" for 127.0.0.1 at 2017-07-09 19:54:08 +0200
+Processing by StocksController#create as JSON
+  Parameters: {"stocks"=>{":name"=>"spencer"}, "bearer_name"=>"Billy Bob", "value_cents"=>"300"}
+Completed 400 Bad Request in 0ms (ActiveRecord: 0.0ms)
+
+
+  
+ActionController::ParameterMissing (param is missing or the value is empty: stock):
+  
+app/controllers/stocks_controller.rb:25:in `stock_params'
+app/controllers/stocks_controller.rb:11:in `create'
+  Rendering /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout
+  Rendering /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_source.html.erb
+  Rendered /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_source.html.erb (1.7ms)
+  Rendering /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb
+  Rendered /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.0ms)
+  Rendering /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb
+  Rendered /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.6ms)
+  Rendered /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (15.6ms)
+Started POST "/stocks" for 127.0.0.1 at 2017-07-09 19:54:31 +0200
+Processing by StocksController#create as JSON
+  Parameters: {"stock"=>{"name"=>"spencer", "bearer_name"=>"Billy Bob", "value_cents"=>"300"}}
+  [1m[36mBearer Load (0.1ms)[0m  [1m[34mSELECT  "bearers".* FROM "bearers" WHERE "bearers"."name" = ? LIMIT ?[0m  [["name", "Billy Bob"], ["LIMIT", 1]]
+  [1m[36mMarketPrice Load (0.1ms)[0m  [1m[34mSELECT  "market_prices".* FROM "market_prices" WHERE "market_prices"."value_cents" = ? LIMIT ?[0m  [["value_cents", 300], ["LIMIT", 1]]
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mMarketPrice Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "market_prices" WHERE "market_prices"."currency" IS NULL AND "market_prices"."value_cents" = ? LIMIT ?[0m  [["value_cents", 300], ["LIMIT", 1]]
+  [1m[35m (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mMarketPrice Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "market_prices" WHERE "market_prices"."currency" IS NULL AND "market_prices"."value_cents" = ? LIMIT ?[0m  [["value_cents", 300], ["LIMIT", 1]]
+  [1m[35mSQL (0.7ms)[0m  [1m[32mINSERT INTO "stocks" ("name", "bearer_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "spencer"], ["bearer_id", 1], ["created_at", "2017-07-09 17:54:31.575190"], ["updated_at", "2017-07-09 17:54:31.575190"]]
+  [1m[35m (7.9ms)[0m  [1m[36mcommit transaction[0m
+Completed 500 Internal Server Error in 17ms (ActiveRecord: 9.0ms)
+
+
+  
+ActionView::MissingTemplate (Missing template stocks/show, application/show with {:locale=>[:en], :formats=>[:json], :variants=>[], :handlers=>[:raw, :erb, :html, :builder, :ruby, :coffee, :jbuilder]}. Searched in:
+  * "/home/spencer/code/StockChallange/app/views"
+):
+  
+app/controllers/stocks_controller.rb:13:in `create'
+  Rendering /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/missing_template.html.erb within rescues/layout
+  Rendering /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_source.html.erb
+  Rendered /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_source.html.erb (2.2ms)
+  Rendering /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb
+  Rendered /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.4ms)
+  Rendering /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb
+  Rendered /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.7ms)
+  Rendered /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/missing_template.html.erb within rescues/layout (17.1ms)
+Started POST "/stocks" for 127.0.0.1 at 2017-07-09 19:57:03 +0200
+Processing by StocksController#create as JSON
+  Parameters: {"stock"=>{"name"=>"spencer", "bearer_name"=>"Billy Bob", "value_cents"=>"300"}}
+  [1m[36mBearer Load (0.1ms)[0m  [1m[34mSELECT  "bearers".* FROM "bearers" WHERE "bearers"."name" = ? LIMIT ?[0m  [["name", "Billy Bob"], ["LIMIT", 1]]
+  [1m[36mMarketPrice Load (0.1ms)[0m  [1m[34mSELECT  "market_prices".* FROM "market_prices" WHERE "market_prices"."value_cents" = ? LIMIT ?[0m  [["value_cents", 300], ["LIMIT", 1]]
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mMarketPrice Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "market_prices" WHERE "market_prices"."currency" IS NULL AND "market_prices"."value_cents" = ? LIMIT ?[0m  [["value_cents", 300], ["LIMIT", 1]]
+  [1m[35m (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mMarketPrice Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "market_prices" WHERE "market_prices"."currency" IS NULL AND "market_prices"."value_cents" = ? LIMIT ?[0m  [["value_cents", 300], ["LIMIT", 1]]
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "stocks" ("name", "bearer_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "spencer"], ["bearer_id", 1], ["created_at", "2017-07-09 17:57:03.108803"], ["updated_at", "2017-07-09 17:57:03.108803"]]
+  [1m[35m (9.3ms)[0m  [1m[36mcommit transaction[0m
+Completed 500 Internal Server Error in 38ms (ActiveRecord: 11.1ms)
+
+
+  
+ActionView::MissingTemplate (Missing template stocks/show, application/show with {:locale=>[:en], :formats=>[:json], :variants=>[], :handlers=>[:raw, :erb, :html, :builder, :ruby, :coffee, :jbuilder]}. Searched in:
+  * "/home/spencer/code/StockChallange/app/views"
+):
+  
+app/controllers/stocks_controller.rb:13:in `create'
+  Rendering /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/missing_template.html.erb within rescues/layout
+  Rendering /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_source.html.erb
+  Rendered /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_source.html.erb (2.5ms)
+  Rendering /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb
+  Rendered /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.5ms)
+  Rendering /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb
+  Rendered /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.9ms)
+  Rendered /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/missing_template.html.erb within rescues/layout (18.3ms)
+Started POST "/stocks" for 127.0.0.1 at 2017-07-09 19:57:16 +0200
+Processing by StocksController#create as JSON
+  Parameters: {"stock"=>{"name"=>"spencer", "bearer_name"=>"Billy Bob"}}
+  [1m[36mBearer Load (0.1ms)[0m  [1m[34mSELECT  "bearers".* FROM "bearers" WHERE "bearers"."name" = ? LIMIT ?[0m  [["name", "Billy Bob"], ["LIMIT", 1]]
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[31mrollback transaction[0m
+Completed 422 Unprocessable Entity in 4ms (Views: 0.3ms | ActiveRecord: 0.2ms)
+
+
+Started POST "/stocks" for 127.0.0.1 at 2017-07-09 19:57:41 +0200
+Processing by StocksController#create as JSON
+  Parameters: {"stock"=>{"name"=>"spencer", "bearer_name"=>"Billy Bob"}}
+  [1m[36mBearer Load (0.1ms)[0m  [1m[34mSELECT  "bearers".* FROM "bearers" WHERE "bearers"."name" = ? LIMIT ?[0m  [["name", "Billy Bob"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[31mrollback transaction[0m
+Completed 422 Unprocessable Entity in 22ms (Views: 0.3ms | ActiveRecord: 1.3ms)
+
+
+Started POST "/stocks" for 127.0.0.1 at 2017-07-09 19:57:47 +0200
+Processing by StocksController#create as JSON
+  Parameters: {"stock"=>{"name"=>"spencer", "bearer_name"=>"Billy Bob", "value_cents"=>"300"}}
+  [1m[36mBearer Load (0.2ms)[0m  [1m[34mSELECT  "bearers".* FROM "bearers" WHERE "bearers"."name" = ? LIMIT ?[0m  [["name", "Billy Bob"], ["LIMIT", 1]]
+  [1m[36mMarketPrice Load (0.1ms)[0m  [1m[34mSELECT  "market_prices".* FROM "market_prices" WHERE "market_prices"."value_cents" = ? LIMIT ?[0m  [["value_cents", 300], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mMarketPrice Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "market_prices" WHERE "market_prices"."currency" IS NULL AND "market_prices"."value_cents" = ? LIMIT ?[0m  [["value_cents", 300], ["LIMIT", 1]]
+  [1m[35m (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mMarketPrice Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "market_prices" WHERE "market_prices"."currency" IS NULL AND "market_prices"."value_cents" = ? LIMIT ?[0m  [["value_cents", 300], ["LIMIT", 1]]
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "stocks" ("name", "bearer_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "spencer"], ["bearer_id", 1], ["created_at", "2017-07-09 17:57:47.957413"], ["updated_at", "2017-07-09 17:57:47.957413"]]
+  [1m[35m (7.7ms)[0m  [1m[36mcommit transaction[0m
+Completed 500 Internal Server Error in 24ms (ActiveRecord: 9.6ms)
+
+
+  
+ActionView::MissingTemplate (Missing template stocks/show, application/show with {:locale=>[:en], :formats=>[:json], :variants=>[], :handlers=>[:raw, :erb, :html, :builder, :ruby, :coffee, :jbuilder]}. Searched in:
+  * "/home/spencer/code/StockChallange/app/views"
+):
+  
+app/controllers/stocks_controller.rb:13:in `create'
+  Rendering /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/missing_template.html.erb within rescues/layout
+  Rendering /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_source.html.erb
+  Rendered /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_source.html.erb (3.1ms)
+  Rendering /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb
+  Rendered /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.3ms)
+  Rendering /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb
+  Rendered /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.9ms)
+  Rendered /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/missing_template.html.erb within rescues/layout (20.1ms)
+Started POST "/stocks" for 127.0.0.1 at 2017-07-09 19:58:58 +0200
+Processing by StocksController#create as JSON
+  Parameters: {"stock"=>{"name"=>"spencer", "bearer_name"=>"Billy Bob", "value_cents"=>"300"}}
+  [1m[36mBearer Load (0.2ms)[0m  [1m[34mSELECT  "bearers".* FROM "bearers" WHERE "bearers"."name" = ? LIMIT ?[0m  [["name", "Billy Bob"], ["LIMIT", 1]]
+  [1m[36mMarketPrice Load (0.1ms)[0m  [1m[34mSELECT  "market_prices".* FROM "market_prices" WHERE "market_prices"."value_cents" = ? LIMIT ?[0m  [["value_cents", 300], ["LIMIT", 1]]
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mMarketPrice Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "market_prices" WHERE "market_prices"."currency" IS NULL AND "market_prices"."value_cents" = ? LIMIT ?[0m  [["value_cents", 300], ["LIMIT", 1]]
+  [1m[35m (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mMarketPrice Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "market_prices" WHERE "market_prices"."currency" IS NULL AND "market_prices"."value_cents" = ? LIMIT ?[0m  [["value_cents", 300], ["LIMIT", 1]]
+  [1m[35mSQL (1.3ms)[0m  [1m[32mINSERT INTO "stocks" ("name", "bearer_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "spencer"], ["bearer_id", 1], ["created_at", "2017-07-09 17:58:58.655635"], ["updated_at", "2017-07-09 17:58:58.655635"]]
+  [1m[35m (7.8ms)[0m  [1m[36mcommit transaction[0m
+  Rendering stocks/show.json.jbuilder
+  Rendered stocks/show.json.jbuilder (47.0ms)
+Completed 201 Created in 65ms (Views: 49.1ms | ActiveRecord: 9.6ms)
+
+
+Started POST "/stocks" for 127.0.0.1 at 2017-07-09 20:02:04 +0200
+Processing by StocksController#create as JSON
+  Parameters: {"stock"=>{"name"=>"spencer", "bearer_name"=>"Billy Bob", "value_cents"=>"300"}}
+  [1m[36mBearer Load (0.1ms)[0m  [1m[34mSELECT  "bearers".* FROM "bearers" WHERE "bearers"."name" = ? LIMIT ?[0m  [["name", "Billy Bob"], ["LIMIT", 1]]
+  [1m[36mMarketPrice Load (0.1ms)[0m  [1m[34mSELECT  "market_prices".* FROM "market_prices" WHERE "market_prices"."value_cents" = ? LIMIT ?[0m  [["value_cents", 300], ["LIMIT", 1]]
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mMarketPrice Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "market_prices" WHERE "market_prices"."currency" IS NULL AND "market_prices"."value_cents" = ? LIMIT ?[0m  [["value_cents", 300], ["LIMIT", 1]]
+  [1m[35m (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mMarketPrice Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "market_prices" WHERE "market_prices"."currency" IS NULL AND "market_prices"."value_cents" = ? LIMIT ?[0m  [["value_cents", 300], ["LIMIT", 1]]
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "stocks" ("name", "bearer_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "spencer"], ["bearer_id", 1], ["created_at", "2017-07-09 18:02:04.987157"], ["updated_at", "2017-07-09 18:02:04.987157"]]
+  [1m[35m (7.7ms)[0m  [1m[36mcommit transaction[0m
+  Rendering stocks/show.json.jbuilder
+  Rendered stocks/show.json.jbuilder (0.4ms)
+Completed 201 Created in 31ms (Views: 1.8ms | ActiveRecord: 9.6ms)
+
+
+Started POST "/stocks" for 127.0.0.1 at 2017-07-09 20:02:41 +0200
+Processing by StocksController#create as JSON
+  Parameters: {"stock"=>{"name"=>"spencer", "bearer_name"=>"Billy Bob", "value_cents"=>"300"}}
+  [1m[36mBearer Load (0.1ms)[0m  [1m[34mSELECT  "bearers".* FROM "bearers" WHERE "bearers"."name" = ? LIMIT ?[0m  [["name", "Billy Bob"], ["LIMIT", 1]]
+  [1m[36mMarketPrice Load (0.1ms)[0m  [1m[34mSELECT  "market_prices".* FROM "market_prices" WHERE "market_prices"."value_cents" = ? LIMIT ?[0m  [["value_cents", 300], ["LIMIT", 1]]
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mMarketPrice Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "market_prices" WHERE "market_prices"."currency" IS NULL AND "market_prices"."value_cents" = ? LIMIT ?[0m  [["value_cents", 300], ["LIMIT", 1]]
+  [1m[35m (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mMarketPrice Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "market_prices" WHERE "market_prices"."currency" IS NULL AND "market_prices"."value_cents" = ? LIMIT ?[0m  [["value_cents", 300], ["LIMIT", 1]]
+  [1m[35mSQL (1.2ms)[0m  [1m[32mINSERT INTO "stocks" ("name", "bearer_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "spencer"], ["bearer_id", 1], ["created_at", "2017-07-09 18:02:41.378207"], ["updated_at", "2017-07-09 18:02:41.378207"]]
+  [1m[35m (8.4ms)[0m  [1m[36mcommit transaction[0m
+  Rendering stocks/show.json.jbuilder
+  Rendered stocks/show.json.jbuilder (1.0ms)
+Completed 201 Created in 22ms (Views: 5.0ms | ActiveRecord: 10.1ms)
+
+
+Started POST "/stocks" for 127.0.0.1 at 2017-07-09 20:03:06 +0200
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by StocksController#create as JSON
+  Parameters: {"stock"=>{"name"=>"spencer", "bearer_name"=>"Billy Bob", "value_cents"=>"300"}}
+  [1m[36mBearer Load (0.1ms)[0m  [1m[34mSELECT  "bearers".* FROM "bearers" WHERE "bearers"."name" = ? LIMIT ?[0m  [["name", "Billy Bob"], ["LIMIT", 1]]
+  [1m[36mMarketPrice Load (0.1ms)[0m  [1m[34mSELECT  "market_prices".* FROM "market_prices" WHERE "market_prices"."value_cents" = ? LIMIT ?[0m  [["value_cents", 300], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mMarketPrice Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "market_prices" WHERE "market_prices"."currency" IS NULL AND "market_prices"."value_cents" = ? LIMIT ?[0m  [["value_cents", 300], ["LIMIT", 1]]
+  [1m[35m (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mMarketPrice Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "market_prices" WHERE "market_prices"."currency" IS NULL AND "market_prices"."value_cents" = ? LIMIT ?[0m  [["value_cents", 300], ["LIMIT", 1]]
+  [1m[35mSQL (1.0ms)[0m  [1m[32mINSERT INTO "stocks" ("name", "bearer_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "spencer"], ["bearer_id", 1], ["created_at", "2017-07-09 18:03:06.235722"], ["updated_at", "2017-07-09 18:03:06.235722"]]
+  [1m[35m (9.4ms)[0m  [1m[36mcommit transaction[0m
+  Rendering stocks/show.json.jbuilder
+  Rendered stocks/show.json.jbuilder (2.3ms)
+Completed 201 Created in 60ms (Views: 8.0ms | ActiveRecord: 12.0ms)
+
+
+Started POST "/stocks" for 127.0.0.1 at 2017-07-09 20:08:48 +0200
+Processing by StocksController#create as JSON
+  Parameters: {"stock"=>{"name"=>"spencer", "bearer_name"=>"Billy Bob", "value_cents"=>"300"}}
+  [1m[36mBearer Load (0.1ms)[0m  [1m[34mSELECT  "bearers".* FROM "bearers" WHERE "bearers"."name" = ? LIMIT ?[0m  [["name", "Billy Bob"], ["LIMIT", 1]]
+  [1m[36mMarketPrice Load (0.1ms)[0m  [1m[34mSELECT  "market_prices".* FROM "market_prices" WHERE "market_prices"."value_cents" = ? ORDER BY "market_prices"."id" ASC LIMIT ?[0m  [["value_cents", 300], ["LIMIT", 1]]
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mMarketPrice Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "market_prices" WHERE "market_prices"."currency" IS NULL AND "market_prices"."value_cents" = ? LIMIT ?[0m  [["value_cents", 300], ["LIMIT", 1]]
+  [1m[35m (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mMarketPrice Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "market_prices" WHERE "market_prices"."currency" IS NULL AND "market_prices"."value_cents" = ? LIMIT ?[0m  [["value_cents", 300], ["LIMIT", 1]]
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "stocks" ("name", "bearer_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "spencer"], ["bearer_id", 1], ["created_at", "2017-07-09 18:08:48.158289"], ["updated_at", "2017-07-09 18:08:48.158289"]]
+  [1m[35m (10.1ms)[0m  [1m[36mcommit transaction[0m
+  Rendering stocks/show.json.jbuilder
+  Rendered stocks/show.json.jbuilder (0.6ms)
+Completed 201 Created in 47ms (Views: 2.5ms | ActiveRecord: 12.8ms)
+
+
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_stocks_on_deleted_at' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_stocks_on_deleted_at' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_stocks_on_market_price_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_stocks_on_market_price_id' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_stocks_on_bearer_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_stocks_on_bearer_id' AND type='index'
+[0m
+Started POST "/stocks" for 127.0.0.1 at 2017-07-09 20:14:26 +0200
+Processing by StocksController#create as JSON
+  Parameters: {"stock"=>{"name"=>"spencer", "bearer_name"=>"Billy Bob", "value_cents"=>"300"}}
+  [1m[36mBearer Load (0.1ms)[0m  [1m[34mSELECT  "bearers".* FROM "bearers" WHERE "bearers"."name" = ? LIMIT ?[0m  [["name", "Billy Bob"], ["LIMIT", 1]]
+  [1m[36mMarketPrice Load (0.2ms)[0m  [1m[34mSELECT  "market_prices".* FROM "market_prices" WHERE "market_prices"."value_cents" = ? ORDER BY "market_prices"."id" ASC LIMIT ?[0m  [["value_cents", 300], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mMarketPrice Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "market_prices" WHERE "market_prices"."currency" IS NULL AND "market_prices"."value_cents" = ? LIMIT ?[0m  [["value_cents", 300], ["LIMIT", 1]]
+  [1m[35m (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mMarketPrice Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "market_prices" WHERE "market_prices"."currency" IS NULL AND "market_prices"."value_cents" = ? LIMIT ?[0m  [["value_cents", 300], ["LIMIT", 1]]
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "stocks" ("name", "bearer_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "spencer"], ["bearer_id", 1], ["created_at", "2017-07-09 18:14:26.488733"], ["updated_at", "2017-07-09 18:14:26.488733"]]
+  [1m[35m (6.9ms)[0m  [1m[36mcommit transaction[0m
+  Rendering stocks/show.json.jbuilder
+  Rendered stocks/show.json.jbuilder (0.4ms)
+Completed 201 Created in 39ms (Views: 2.0ms | ActiveRecord: 9.7ms)
+
+
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ?[0m  [["key", "environment"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.0ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ?[0m  [["key", "environment"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.0ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ?[0m  [["key", "environment"]]
+  [1m[35m (8.6ms)[0m  [1m[35mCREATE TABLE "bearers" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  [1m[35m (8.0ms)[0m  [1m[35mCREATE TABLE "market_prices" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "currency" varchar, "value_cents" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  [1m[35m (11.3ms)[0m  [1m[35mCREATE TABLE "stocks" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "bearer_id" integer, "market_price_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, "deleted_at" datetime)[0m
+  [1m[35m (0.2ms)[0m  [1m[34mselect sqlite_version(*)[0m
+  [1m[35m (9.7ms)[0m  [1m[35mCREATE  INDEX "index_stocks_on_bearer_id" ON "stocks" ("bearer_id")[0m
+  [1m[35m (0.3ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_stocks_on_bearer_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_stocks_on_bearer_id' AND type='index'
+[0m
+  [1m[35m (9.5ms)[0m  [1m[35mCREATE  INDEX "index_stocks_on_deleted_at" ON "stocks" ("deleted_at")[0m
+  [1m[35m (0.2ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_stocks_on_deleted_at' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_stocks_on_deleted_at' AND type='index'
+[0m
+  [1m[35m (0.3ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_stocks_on_bearer_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_stocks_on_bearer_id' AND type='index'
+[0m
+  [1m[35m (11.0ms)[0m  [1m[35mCREATE  INDEX "index_stocks_on_market_price_id" ON "stocks" ("market_price_id")[0m
+  [1m[35m (9.4ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL PRIMARY KEY)[0m
+  [1m[35m (8.5ms)[0m  [1m[34mSELECT version FROM "schema_migrations"[0m
+  [1m[35m (9.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20170709161829)[0m
+  [1m[35m (7.6ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES
+(20170707120953),
+(20170707121253),
+(20170707121919);
+
+[0m
+  [1m[35m (10.2ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" varchar NOT NULL PRIMARY KEY, "value" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.4ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["key", "environment"], ["value", "development"], ["created_at", "2017-07-09 18:14:48.273476"], ["updated_at", "2017-07-09 18:14:48.273476"]]
+  [1m[35m (7.3ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (8.8ms)[0m  [1m[35mCREATE TABLE "bearers" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  [1m[35m (9.3ms)[0m  [1m[35mCREATE TABLE "market_prices" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "currency" varchar, "value_cents" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  [1m[35m (9.9ms)[0m  [1m[35mCREATE TABLE "stocks" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "bearer_id" integer, "market_price_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, "deleted_at" datetime)[0m
+  [1m[35m (0.2ms)[0m  [1m[34mselect sqlite_version(*)[0m
+  [1m[35m (9.9ms)[0m  [1m[35mCREATE  INDEX "index_stocks_on_bearer_id" ON "stocks" ("bearer_id")[0m
+  [1m[35m (0.2ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_stocks_on_bearer_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_stocks_on_bearer_id' AND type='index'
+[0m
+  [1m[35m (9.9ms)[0m  [1m[35mCREATE  INDEX "index_stocks_on_deleted_at" ON "stocks" ("deleted_at")[0m
+  [1m[35m (0.2ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_stocks_on_deleted_at' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_stocks_on_deleted_at' AND type='index'
+[0m
+  [1m[35m (0.2ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_stocks_on_bearer_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_stocks_on_bearer_id' AND type='index'
+[0m
+  [1m[35m (9.9ms)[0m  [1m[35mCREATE  INDEX "index_stocks_on_market_price_id" ON "stocks" ("market_price_id")[0m
+  [1m[35m (10.0ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL PRIMARY KEY)[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT version FROM "schema_migrations"[0m
+  [1m[35m (8.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20170709161829)[0m
+  [1m[35m (7.6ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES
+(20170707120953),
+(20170707121253),
+(20170707121919);
+
+[0m
+  [1m[35m (10.1ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" varchar NOT NULL PRIMARY KEY, "value" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["key", "environment"], ["value", "development"], ["created_at", "2017-07-09 18:14:48.405032"], ["updated_at", "2017-07-09 18:14:48.405032"]]
+  [1m[35m (7.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mBearer Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "bearers" WHERE "bearers"."name" = ? LIMIT ?[0m  [["name", "Billy Bob"], ["LIMIT", 1]]
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "bearers" ("name", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["name", "Billy Bob"], ["created_at", "2017-07-09 18:14:48.472489"], ["updated_at", "2017-07-09 18:14:48.472489"]]
+  [1m[35m (7.3ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mBearer Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "bearers" WHERE "bearers"."name" = ? LIMIT ?[0m  [["name", "Georgie Porgie"], ["LIMIT", 1]]
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "bearers" ("name", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["name", "Georgie Porgie"], ["created_at", "2017-07-09 18:14:48.483704"], ["updated_at", "2017-07-09 18:14:48.483704"]]
+  [1m[35m (6.6ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mBearer Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "bearers" WHERE "bearers"."name" = ? LIMIT ?[0m  [["name", "Jon Snow"], ["LIMIT", 1]]
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "bearers" ("name", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["name", "Jon Snow"], ["created_at", "2017-07-09 18:14:48.493813"], ["updated_at", "2017-07-09 18:14:48.493813"]]
+  [1m[35m (6.6ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mMarketPrice Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "market_prices" WHERE "market_prices"."currency" = ? AND "market_prices"."value_cents" = ? LIMIT ?[0m  [["currency", "USD"], ["value_cents", 150], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "market_prices" ("currency", "value_cents", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["currency", "USD"], ["value_cents", 150], ["created_at", "2017-07-09 18:14:48.517836"], ["updated_at", "2017-07-09 18:14:48.517836"]]
+  [1m[35m (6.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mMarketPrice Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "market_prices" WHERE "market_prices"."currency" = ? AND "market_prices"."value_cents" = ? LIMIT ?[0m  [["currency", "USD"], ["value_cents", 200], ["LIMIT", 1]]
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "market_prices" ("currency", "value_cents", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["currency", "USD"], ["value_cents", 200], ["created_at", "2017-07-09 18:14:48.530252"], ["updated_at", "2017-07-09 18:14:48.530252"]]
+  [1m[35m (6.5ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mMarketPrice Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "market_prices" WHERE "market_prices"."currency" = ? AND "market_prices"."value_cents" = ? LIMIT ?[0m  [["currency", "EUR"], ["value_cents", 200], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "market_prices" ("currency", "value_cents", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["currency", "EUR"], ["value_cents", 200], ["created_at", "2017-07-09 18:14:48.543715"], ["updated_at", "2017-07-09 18:14:48.543715"]]
+  [1m[35m (6.5ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "stocks" ("name", "bearer_id", "market_price_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["name", "Microsoft"], ["bearer_id", 1], ["market_price_id", 1], ["created_at", "2017-07-09 18:14:48.583685"], ["updated_at", "2017-07-09 18:14:48.583685"]]
+  [1m[35m (7.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "stocks" ("name", "bearer_id", "market_price_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["name", "Microsoft"], ["bearer_id", 2], ["market_price_id", 1], ["created_at", "2017-07-09 18:14:48.593813"], ["updated_at", "2017-07-09 18:14:48.593813"]]
+  [1m[35m (7.9ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "stocks" ("name", "bearer_id", "market_price_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["name", "Microsoft"], ["bearer_id", 3], ["market_price_id", 1], ["created_at", "2017-07-09 18:14:48.605425"], ["updated_at", "2017-07-09 18:14:48.605425"]]
+  [1m[35m (8.2ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "stocks" ("name", "bearer_id", "market_price_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["name", "BMW Cars"], ["bearer_id", 2], ["market_price_id", 3], ["created_at", "2017-07-09 18:14:48.618711"], ["updated_at", "2017-07-09 18:14:48.618711"]]
+  [1m[35m (8.2ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "stocks" ("name", "bearer_id", "market_price_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["name", "BMW Cars"], ["bearer_id", 1], ["market_price_id", 3], ["created_at", "2017-07-09 18:14:48.632074"], ["updated_at", "2017-07-09 18:14:48.632074"]]
+  [1m[35m (8.1ms)[0m  [1m[36mcommit transaction[0m
+Started POST "/stocks" for 127.0.0.1 at 2017-07-09 20:14:54 +0200
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by StocksController#create as JSON
+  Parameters: {"stock"=>{"name"=>"spencer", "bearer_name"=>"Billy Bob", "value_cents"=>"300"}}
+  [1m[36mBearer Load (0.3ms)[0m  [1m[34mSELECT  "bearers".* FROM "bearers" WHERE "bearers"."name" = ? LIMIT ?[0m  [["name", "Billy Bob"], ["LIMIT", 1]]
+  [1m[36mMarketPrice Load (0.1ms)[0m  [1m[34mSELECT  "market_prices".* FROM "market_prices" WHERE "market_prices"."value_cents" = ? ORDER BY "market_prices"."id" ASC LIMIT ?[0m  [["value_cents", 300], ["LIMIT", 1]]
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mMarketPrice Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "market_prices" WHERE "market_prices"."currency" IS NULL AND "market_prices"."value_cents" = ? LIMIT ?[0m  [["value_cents", 300], ["LIMIT", 1]]
+  [1m[35m (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mMarketPrice Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "market_prices" WHERE "market_prices"."currency" IS NULL AND "market_prices"."value_cents" = ? LIMIT ?[0m  [["value_cents", 300], ["LIMIT", 1]]
+  [1m[35mSQL (1.0ms)[0m  [1m[32mINSERT INTO "stocks" ("name", "bearer_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "spencer"], ["bearer_id", 1], ["created_at", "2017-07-09 18:14:54.907109"], ["updated_at", "2017-07-09 18:14:54.907109"]]
+  [1m[35m (7.1ms)[0m  [1m[36mcommit transaction[0m
+  Rendering stocks/show.json.jbuilder
+  Rendered stocks/show.json.jbuilder (3.2ms)
+Completed 201 Created in 63ms (Views: 8.6ms | ActiveRecord: 9.9ms)
+
+
+Started POST "/stocks" for 127.0.0.1 at 2017-07-09 20:15:07 +0200
+Processing by StocksController#create as JSON
+Completed 400 Bad Request in 1ms (ActiveRecord: 0.0ms)
+
+
+  
+ActionController::ParameterMissing (param is missing or the value is empty: stock):
+  
+app/controllers/stocks_controller.rb:25:in `stock_params'
+app/controllers/stocks_controller.rb:11:in `create'
+  Rendering /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout
+  Rendering /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_source.html.erb
+  Rendered /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_source.html.erb (2.0ms)
+  Rendering /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb
+  Rendered /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.2ms)
+  Rendering /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb
+  Rendered /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.8ms)
+  Rendered /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (20.7ms)
+Started POST "/stocks" for 127.0.0.1 at 2017-07-09 20:15:47 +0200
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by StocksController#create as JSON
+Completed 400 Bad Request in 7ms (ActiveRecord: 0.0ms)
+
+
+  
+ActionController::ParameterMissing (param is missing or the value is empty: stock):
+  
+app/controllers/stocks_controller.rb:25:in `stock_params'
+app/controllers/stocks_controller.rb:11:in `create'
+  Rendering /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout
+  Rendering /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_source.html.erb
+  Rendered /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_source.html.erb (3.2ms)
+  Rendering /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb
+  Rendered /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.7ms)
+  Rendering /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb
+  Rendered /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.9ms)
+  Rendered /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (24.1ms)
+Started POST "/stocks" for 127.0.0.1 at 2017-07-09 20:15:55 +0200
+Processing by StocksController#create as JSON
+  Parameters: {"stock"=>{"value_cents"=>"300"}}
+  [1m[36mMarketPrice Load (0.3ms)[0m  [1m[34mSELECT  "market_prices".* FROM "market_prices" WHERE "market_prices"."value_cents" = ? ORDER BY "market_prices"."id" ASC LIMIT ?[0m  [["value_cents", 300], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mMarketPrice Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "market_prices" WHERE "market_prices"."currency" IS NULL AND "market_prices"."value_cents" = ? LIMIT ?[0m  [["value_cents", 300], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[31mrollback transaction[0m
+Completed 422 Unprocessable Entity in 32ms (Views: 0.2ms | ActiveRecord: 1.5ms)
+
+
+Started POST "/stocks" for 127.0.0.1 at 2017-07-09 20:16:14 +0200
+Processing by StocksController#create as JSON
+  Parameters: {"stock"=>{"name"=>"spencer", "bearer_name"=>"Billy Bob", "value_cents"=>"300"}}
+  [1m[36mBearer Load (0.1ms)[0m  [1m[34mSELECT  "bearers".* FROM "bearers" WHERE "bearers"."name" = ? LIMIT ?[0m  [["name", "Billy Bob"], ["LIMIT", 1]]
+  [1m[36mMarketPrice Load (0.1ms)[0m  [1m[34mSELECT  "market_prices".* FROM "market_prices" WHERE "market_prices"."value_cents" = ? ORDER BY "market_prices"."id" ASC LIMIT ?[0m  [["value_cents", 300], ["LIMIT", 1]]
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mMarketPrice Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "market_prices" WHERE "market_prices"."currency" IS NULL AND "market_prices"."value_cents" = ? LIMIT ?[0m  [["value_cents", 300], ["LIMIT", 1]]
+  [1m[35m (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mMarketPrice Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "market_prices" WHERE "market_prices"."currency" IS NULL AND "market_prices"."value_cents" = ? LIMIT ?[0m  [["value_cents", 300], ["LIMIT", 1]]
+  [1m[35mSQL (1.2ms)[0m  [1m[32mINSERT INTO "stocks" ("name", "bearer_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "spencer"], ["bearer_id", 1], ["created_at", "2017-07-09 18:16:14.876088"], ["updated_at", "2017-07-09 18:16:14.876088"]]
+  [1m[35m (8.0ms)[0m  [1m[36mcommit transaction[0m
+  Rendering stocks/show.json.jbuilder
+  Rendered stocks/show.json.jbuilder (1.7ms)
+Completed 201 Created in 23ms (Views: 3.3ms | ActiveRecord: 10.1ms)
+
+
+Started POST "/stocks" for 127.0.0.1 at 2017-07-09 20:17:14 +0200
+Processing by StocksController#create as JSON
+  Parameters: {"stock"=>{"name"=>"spencer", "bearer_name"=>"Billy Bob", "value_cents"=>"300"}}
+  [1m[36mBearer Load (0.1ms)[0m  [1m[34mSELECT  "bearers".* FROM "bearers" WHERE "bearers"."name" = ? LIMIT ?[0m  [["name", "Billy Bob"], ["LIMIT", 1]]
+Completed 500 Internal Server Error in 14ms (ActiveRecord: 1.1ms)
+
+
+  
+ArgumentError (wrong number of arguments (given 1, expected 2)):
+  
+app/models/stock.rb:28:in `value_cents='
+app/controllers/stocks_controller.rb:11:in `create'
+  Rendering /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout
+  Rendering /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_source.html.erb
+  Rendered /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_source.html.erb (2.1ms)
+  Rendering /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb
+  Rendered /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.0ms)
+  Rendering /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb
+  Rendered /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.8ms)
+  Rendered /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (16.2ms)
+Started POST "/stocks" for 127.0.0.1 at 2017-07-09 20:18:30 +0200
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by StocksController#create as JSON
+  Parameters: {"stock"=>{"name"=>"spencer", "bearer_name"=>"Billy Bob", "value_cents"=>"300"}}
+Unpermitted parameter: value_cents
+  [1m[36mBearer Load (0.1ms)[0m  [1m[34mSELECT  "bearers".* FROM "bearers" WHERE "bearers"."name" = ? LIMIT ?[0m  [["name", "Billy Bob"], ["LIMIT", 1]]
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[31mrollback transaction[0m
+Completed 422 Unprocessable Entity in 26ms (Views: 0.2ms | ActiveRecord: 1.0ms)
+
+
+Started POST "/stocks" for 127.0.0.1 at 2017-07-09 20:18:58 +0200
+Processing by StocksController#create as JSON
+  Parameters: {"stock"=>{"name"=>"spencer", "bearer_name"=>"Billy Bob", "value_cents"=>"300"}}
+Unpermitted parameter: value_cents
+  [1m[36mBearer Load (0.1ms)[0m  [1m[34mSELECT  "bearers".* FROM "bearers" WHERE "bearers"."name" = ? LIMIT ?[0m  [["name", "Billy Bob"], ["LIMIT", 1]]
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[31mrollback transaction[0m
+Completed 422 Unprocessable Entity in 4ms (Views: 0.2ms | ActiveRecord: 0.2ms)
+
+
+Started POST "/stocks" for 127.0.0.1 at 2017-07-09 20:19:06 +0200
+Processing by StocksController#create as JSON
+Completed 400 Bad Request in 0ms (ActiveRecord: 0.0ms)
+
+
+  
+ActionController::ParameterMissing (param is missing or the value is empty: stock):
+  
+app/controllers/stocks_controller.rb:25:in `stock_params'
+app/controllers/stocks_controller.rb:11:in `create'
+  Rendering /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout
+  Rendering /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_source.html.erb
+  Rendered /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_source.html.erb (2.3ms)
+  Rendering /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb
+  Rendered /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.2ms)
+  Rendering /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb
+  Rendered /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.9ms)
+  Rendered /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (22.1ms)
+Started POST "/stocks" for 127.0.0.1 at 2017-07-09 20:19:16 +0200
+Processing by StocksController#create as JSON
+  Parameters: {"stock"=>{"name"=>"spencer", "bearer_name"=>"Billy Bob", "value_cents"=>"300"}}
+Unpermitted parameter: value_cents
+  [1m[36mBearer Load (0.1ms)[0m  [1m[34mSELECT  "bearers".* FROM "bearers" WHERE "bearers"."name" = ? LIMIT ?[0m  [["name", "Billy Bob"], ["LIMIT", 1]]
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[31mrollback transaction[0m
+Completed 422 Unprocessable Entity in 3ms (Views: 0.1ms | ActiveRecord: 0.2ms)
+
+
+Started POST "/stocks" for 127.0.0.1 at 2017-07-09 20:21:17 +0200
+Processing by StocksController#create as JSON
+  Parameters: {"stock"=>{"name"=>"spencer", "bearer_name"=>"Billy Bob", "value_cents"=>"300"}}
+Unpermitted parameter: value_cents
+  [1m[36mBearer Load (0.1ms)[0m  [1m[34mSELECT  "bearers".* FROM "bearers" WHERE "bearers"."name" = ? LIMIT ?[0m  [["name", "Billy Bob"], ["LIMIT", 1]]
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[31mrollback transaction[0m
+Completed 422 Unprocessable Entity in 19ms (Views: 0.4ms | ActiveRecord: 1.3ms)
+
+
+Started POST "/stocks" for 127.0.0.1 at 2017-07-09 20:21:53 +0200
+Processing by StocksController#create as JSON
+  Parameters: {"stock"=>{"name"=>"spencer", "bearer_name"=>"Billy Bob", "value_cents"=>"300"}}
+  [1m[36mBearer Load (0.1ms)[0m  [1m[34mSELECT  "bearers".* FROM "bearers" WHERE "bearers"."name" = ? LIMIT ?[0m  [["name", "Billy Bob"], ["LIMIT", 1]]
+Completed 500 Internal Server Error in 25ms (ActiveRecord: 1.2ms)
+
+
+  
+NoMethodError (undefined method `currency' for #<Class:0x005635c1e6ad00>
+Did you mean?  current_scope):
+  
+app/models/stock.rb:29:in `value_cents='
+app/controllers/stocks_controller.rb:11:in `create'
+  Rendering /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout
+  Rendering /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_source.html.erb
+  Rendered /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_source.html.erb (2.2ms)
+  Rendering /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb
+  Rendered /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.7ms)
+  Rendering /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb
+  Rendered /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.8ms)
+  Rendered /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (21.1ms)
+Started POST "/stocks" for 127.0.0.1 at 2017-07-09 20:22:58 +0200
+Processing by StocksController#create as JSON
+  Parameters: {"stock"=>{"name"=>"spencer", "bearer_name"=>"Billy Bob", "value_cents"=>"300"}}
+  [1m[36mBearer Load (0.1ms)[0m  [1m[34mSELECT  "bearers".* FROM "bearers" WHERE "bearers"."name" = ? LIMIT ?[0m  [["name", "Billy Bob"], ["LIMIT", 1]]
+  [1m[36mMarketPrice Load (0.1ms)[0m  [1m[34mSELECT  "market_prices".* FROM "market_prices" WHERE "market_prices"."value_cents" = ? ORDER BY "market_prices"."id" ASC LIMIT ?[0m  [["value_cents", 300], ["LIMIT", 1]]
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mMarketPrice Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "market_prices" WHERE "market_prices"."currency" IS NULL AND "market_prices"."value_cents" = ? LIMIT ?[0m  [["value_cents", 300], ["LIMIT", 1]]
+  [1m[35m (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mMarketPrice Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "market_prices" WHERE "market_prices"."currency" IS NULL AND "market_prices"."value_cents" = ? LIMIT ?[0m  [["value_cents", 300], ["LIMIT", 1]]
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "stocks" ("name", "bearer_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "spencer"], ["bearer_id", 1], ["created_at", "2017-07-09 18:22:58.269609"], ["updated_at", "2017-07-09 18:22:58.269609"]]
+  [1m[35m (8.8ms)[0m  [1m[36mcommit transaction[0m
+  Rendering stocks/show.json.jbuilder
+  Rendered stocks/show.json.jbuilder (2.6ms)
+Completed 201 Created in 45ms (Views: 4.4ms | ActiveRecord: 11.0ms)
+
+
+Started PATCH "/stock/1/" for 127.0.0.1 at 2017-07-09 20:25:50 +0200
+  
+ActionController::RoutingError (No route matches [PATCH] "/stock/1"):
+  
+actionpack (5.0.3) lib/action_dispatch/middleware/debug_exceptions.rb:53:in `call'
+web-console (3.5.1) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.5.1) lib/web_console/middleware.rb:28:in `block in call'
+web-console (3.5.1) lib/web_console/middleware.rb:18:in `catch'
+web-console (3.5.1) lib/web_console/middleware.rb:18:in `call'
+actionpack (5.0.3) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.0.3) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.0.3) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.0.3) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.0.3) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.0.3) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.0.3) lib/rails/rack/logger.rb:24:in `call'
+sprockets-rails (3.2.0) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (5.0.3) lib/action_dispatch/middleware/request_id.rb:24:in `call'
+rack (2.0.2) lib/rack/method_override.rb:22:in `call'
+rack (2.0.2) lib/rack/runtime.rb:22:in `call'
+activesupport (5.0.3) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+actionpack (5.0.3) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.0.3) lib/action_dispatch/middleware/static.rb:136:in `call'
+rack (2.0.2) lib/rack/sendfile.rb:111:in `call'
+railties (5.0.3) lib/rails/engine.rb:522:in `call'
+puma (3.8.2) lib/puma/configuration.rb:224:in `call'
+puma (3.8.2) lib/puma/server.rb:600:in `handle_request'
+puma (3.8.2) lib/puma/server.rb:435:in `process_client'
+puma (3.8.2) lib/puma/server.rb:299:in `block in run'
+puma (3.8.2) lib/puma/thread_pool.rb:120:in `block in spawn_thread'
+  Rendering /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout
+  Rendering /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb
+  Rendered /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (2.6ms)
+  Rendered collection of /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/routes/_route.html.erb [5 times] (29.3ms)
+  Rendered /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/routes/_table.html.erb (21.6ms)
+  Rendering /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb
+  Rendered /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.6ms)
+  Rendered /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout (100.0ms)
+Started PATCH "/stocks/1/" for 127.0.0.1 at 2017-07-09 20:26:03 +0200
+Processing by StocksController#update as JSON
+  Parameters: {"stock"=>{"bearer_name"=>"Billy Bob", "value_cents"=>"300"}, "id"=>"1"}
+  [1m[36mStock Load (0.1ms)[0m  [1m[34mSELECT  "stocks".* FROM "stocks" WHERE "stocks"."deleted_at" IS NULL AND "stocks"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mBearer Load (0.1ms)[0m  [1m[34mSELECT  "bearers".* FROM "bearers" WHERE "bearers"."name" = ? LIMIT ?[0m  [["name", "Billy Bob"], ["LIMIT", 1]]
+  [1m[36mMarketPrice Load (0.1ms)[0m  [1m[34mSELECT  "market_prices".* FROM "market_prices" WHERE "market_prices"."value_cents" = ? ORDER BY "market_prices"."id" ASC LIMIT ?[0m  [["value_cents", 300], ["LIMIT", 1]]
+  [1m[36mMarketPrice Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "market_prices" WHERE "market_prices"."currency" IS NULL AND "market_prices"."value_cents" = ? LIMIT ?[0m  [["value_cents", 300], ["LIMIT", 1]]
+  [1m[36mMarketPrice Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "market_prices" WHERE "market_prices"."currency" IS NULL AND "market_prices"."value_cents" = ? LIMIT ?[0m  [["value_cents", 300], ["LIMIT", 1]]
+  [1m[35mSQL (0.2ms)[0m  [1m[33mUPDATE "stocks" SET "market_price_id" = ?, "updated_at" = ? WHERE "stocks"."id" = ?[0m  [["market_price_id", nil], ["updated_at", "2017-07-09 18:26:03.926259"], ["id", 1]]
+  [1m[35m (8.2ms)[0m  [1m[36mcommit transaction[0m
+  Rendering stocks/show.json.jbuilder
+  Rendered stocks/show.json.jbuilder (0.4ms)
+Completed 201 Created in 37ms (Views: 2.0ms | ActiveRecord: 10.2ms)
+
+
+  [1m[36mBearer Load (0.1ms)[0m  [1m[34mSELECT  "bearers".* FROM "bearers" WHERE "bearers"."name" = ? LIMIT ?[0m  [["name", "george"], ["LIMIT", 1]]
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mBearer Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "bearers" WHERE "bearers"."name" = ? LIMIT ?[0m  [["name", "george"], ["LIMIT", 1]]
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "bearers" ("name", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["name", "george"], ["created_at", "2017-07-09 18:36:32.321208"], ["updated_at", "2017-07-09 18:36:32.321208"]]
+  [1m[35m (7.6ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mBearer Load (0.1ms)[0m  [1m[34mSELECT  "bearers".* FROM "bearers" WHERE "bearers"."name" = ? LIMIT ?[0m  [["name", "george"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mMarketPrice Load (0.3ms)[0m  [1m[34mSELECT  "market_prices".* FROM "market_prices" WHERE "market_prices"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mMarketPrice Load (0.1ms)[0m  [1m[34mSELECT  "market_prices".* FROM "market_prices" ORDER BY "market_prices"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mBearer Load (0.1ms)[0m  [1m[34mSELECT  "bearers".* FROM "bearers" WHERE "bearers"."name" = ? ORDER BY "bearers"."id" ASC LIMIT ?[0m  [["name", "Cool Guy"], ["LIMIT", 1]]
+  [1m[36mBearer Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "bearers" WHERE "bearers"."name" = ? LIMIT ?[0m  [["name", "Cool Guy"], ["LIMIT", 1]]
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "bearers" ("name", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["name", "Cool Guy"], ["created_at", "2017-07-10 12:32:06.391887"], ["updated_at", "2017-07-10 12:32:06.391887"]]
+  [1m[36mMarketPrice Load (0.1ms)[0m  [1m[34mSELECT  "market_prices".* FROM "market_prices" WHERE "market_prices"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "stocks" ("name", "bearer_id", "market_price_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["name", "Microsoft"], ["bearer_id", 5], ["market_price_id", 1], ["created_at", "2017-07-10 12:32:06.404191"], ["updated_at", "2017-07-10 12:32:06.404191"]]
+  [1m[35m (8.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mBearer Load (0.2ms)[0m  [1m[34mSELECT  "bearers".* FROM "bearers" WHERE "bearers"."name" = ? ORDER BY "bearers"."id" ASC LIMIT ?[0m  [["name", "Billy Bob"], ["LIMIT", 1]]
+  [1m[36mMarketPrice Load (0.1ms)[0m  [1m[34mSELECT  "market_prices".* FROM "market_prices" WHERE "market_prices"."value_cents" = ? AND "market_prices"."currency" = ? ORDER BY "market_prices"."id" ASC LIMIT ?[0m  [["value_cents", 300], ["currency", "USD"], ["LIMIT", 1]]
+  [1m[36mMarketPrice Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "market_prices" WHERE "market_prices"."currency" = ? AND "market_prices"."value_cents" = ? LIMIT ?[0m  [["currency", "USD"], ["value_cents", 300], ["LIMIT", 1]]
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO "market_prices" ("currency", "value_cents", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["currency", "USD"], ["value_cents", 300], ["created_at", "2017-07-10 12:35:13.329456"], ["updated_at", "2017-07-10 12:35:13.329456"]]
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO "stocks" ("name", "bearer_id", "market_price_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["name", "Microsoft"], ["bearer_id", 1], ["market_price_id", 4], ["created_at", "2017-07-10 12:35:13.332144"], ["updated_at", "2017-07-10 12:35:13.332144"]]
+  [1m[35m (7.7ms)[0m  [1m[36mcommit transaction[0m
+Started POST "/stocks" for 127.0.0.1 at 2017-07-10 14:44:16 +0200
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by StocksController#create as JSON
+  Parameters: {"stock"=>{"name"=>"spencer", "bearer_name"=>"Billy Bob", "value_cents"=>"300"}}
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mBearer Load (0.1ms)[0m  [1m[34mSELECT  "bearers".* FROM "bearers" WHERE "bearers"."name" = ? ORDER BY "bearers"."id" ASC LIMIT ?[0m  [["name", "Billy Bob"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[31mrollback transaction[0m
+Completed 422 Unprocessable Entity in 27ms (Views: 0.3ms | ActiveRecord: 1.0ms)
+
+
+Started PATCH "/stocks/" for 127.0.0.1 at 2017-07-10 14:44:58 +0200
+  
+ActionController::RoutingError (No route matches [PATCH] "/stocks"):
+  
+actionpack (5.0.3) lib/action_dispatch/middleware/debug_exceptions.rb:53:in `call'
+web-console (3.5.1) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.5.1) lib/web_console/middleware.rb:28:in `block in call'
+web-console (3.5.1) lib/web_console/middleware.rb:18:in `catch'
+web-console (3.5.1) lib/web_console/middleware.rb:18:in `call'
+actionpack (5.0.3) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.0.3) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.0.3) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.0.3) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.0.3) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.0.3) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.0.3) lib/rails/rack/logger.rb:24:in `call'
+sprockets-rails (3.2.0) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (5.0.3) lib/action_dispatch/middleware/request_id.rb:24:in `call'
+rack (2.0.2) lib/rack/method_override.rb:22:in `call'
+rack (2.0.2) lib/rack/runtime.rb:22:in `call'
+activesupport (5.0.3) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+actionpack (5.0.3) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.0.3) lib/action_dispatch/middleware/static.rb:136:in `call'
+rack (2.0.2) lib/rack/sendfile.rb:111:in `call'
+railties (5.0.3) lib/rails/engine.rb:522:in `call'
+puma (3.8.2) lib/puma/configuration.rb:224:in `call'
+puma (3.8.2) lib/puma/server.rb:600:in `handle_request'
+puma (3.8.2) lib/puma/server.rb:435:in `process_client'
+puma (3.8.2) lib/puma/server.rb:299:in `block in run'
+puma (3.8.2) lib/puma/thread_pool.rb:120:in `block in spawn_thread'
+  Rendering /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout
+  Rendering /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb
+  Rendered /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.7ms)
+  Rendered collection of /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/routes/_route.html.erb [5 times] (31.0ms)
+  Rendered /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/routes/_table.html.erb (30.9ms)
+  Rendering /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb
+  Rendered /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (2.3ms)
+  Rendered /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout (111.5ms)
+Started GET "/stocks/" for 127.0.0.1 at 2017-07-10 14:45:07 +0200
+Processing by StocksController#index as JSON
+  Parameters: {"stock"=>{}}
+  Rendering stocks/index.json.jbuilder
+  [1m[36mStock Load (0.5ms)[0m  [1m[34mSELECT "stocks".* FROM "stocks" WHERE "stocks"."deleted_at" IS NULL[0m
+  [1m[36mMarketPrice Load (0.4ms)[0m  [1m[34mSELECT "market_prices".* FROM "market_prices" WHERE "market_prices"."id" IN (1, 3, 4)[0m
+  [1m[36mBearer Load (0.3ms)[0m  [1m[34mSELECT "bearers".* FROM "bearers" WHERE "bearers"."id" IN (1, 2, 3, 5)[0m
+  Rendered stocks/index.json.jbuilder (62.4ms)
+Completed 500 Internal Server Error in 149ms (ActiveRecord: 2.3ms)
+
+
+  
+ActionView::Template::Error (undefined method `value_cents' for nil:NilClass):
+    1: json.array! @stocks do |stock|
+    2:   json.stock_name stock.name
+    3:   json.extract! stock.market_price, :value_cents, :currency
+    4:   json.bearer stock.bearer.name
+    5: end
+  
+app/views/stocks/index.json.jbuilder:3:in `block in _app_views_stocks_index_json_jbuilder___3427922371749982071_47209149245440'
+app/views/stocks/index.json.jbuilder:1:in `_app_views_stocks_index_json_jbuilder___3427922371749982071_47209149245440'
+  Rendering /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout
+  Rendering /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_source.html.erb
+  Rendered /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_source.html.erb (2.8ms)
+  Rendering /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb
+  Rendered /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.6ms)
+  Rendering /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb
+  Rendered /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.6ms)
+  Rendered /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (19.5ms)
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ?[0m  [["key", "environment"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.0ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ?[0m  [["key", "environment"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.0ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ?[0m  [["key", "environment"]]
+  [1m[35m (12.2ms)[0m  [1m[35mCREATE TABLE "bearers" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  [1m[35m (8.4ms)[0m  [1m[35mCREATE TABLE "market_prices" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "currency" varchar, "value_cents" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  [1m[35m (8.5ms)[0m  [1m[35mCREATE TABLE "stocks" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "bearer_id" integer, "market_price_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, "deleted_at" datetime)[0m
+  [1m[35m (0.2ms)[0m  [1m[34mselect sqlite_version(*)[0m
+  [1m[35m (8.5ms)[0m  [1m[35mCREATE  INDEX "index_stocks_on_bearer_id" ON "stocks" ("bearer_id")[0m
+  [1m[35m (0.3ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_stocks_on_bearer_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_stocks_on_bearer_id' AND type='index'
+[0m
+  [1m[35m (8.7ms)[0m  [1m[35mCREATE  INDEX "index_stocks_on_deleted_at" ON "stocks" ("deleted_at")[0m
+  [1m[35m (0.2ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_stocks_on_deleted_at' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_stocks_on_deleted_at' AND type='index'
+[0m
+  [1m[35m (0.2ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_stocks_on_bearer_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_stocks_on_bearer_id' AND type='index'
+[0m
+  [1m[35m (9.7ms)[0m  [1m[35mCREATE  INDEX "index_stocks_on_market_price_id" ON "stocks" ("market_price_id")[0m
+  [1m[35m (9.2ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL PRIMARY KEY)[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT version FROM "schema_migrations"[0m
+  [1m[35m (7.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20170709161829)[0m
+  [1m[35m (7.8ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES
+(20170707120953),
+(20170707121253),
+(20170707121919);
+
+[0m
+  [1m[35m (25.5ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" varchar NOT NULL PRIMARY KEY, "value" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.8ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["key", "environment"], ["value", "development"], ["created_at", "2017-07-10 12:45:35.131802"], ["updated_at", "2017-07-10 12:45:35.131802"]]
+  [1m[35m (7.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (8.9ms)[0m  [1m[35mCREATE TABLE "bearers" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  [1m[35m (9.1ms)[0m  [1m[35mCREATE TABLE "market_prices" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "currency" varchar, "value_cents" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  [1m[35m (9.8ms)[0m  [1m[35mCREATE TABLE "stocks" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "bearer_id" integer, "market_price_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, "deleted_at" datetime)[0m
+  [1m[35m (0.1ms)[0m  [1m[34mselect sqlite_version(*)[0m
+  [1m[35m (9.6ms)[0m  [1m[35mCREATE  INDEX "index_stocks_on_bearer_id" ON "stocks" ("bearer_id")[0m
+  [1m[35m (0.2ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_stocks_on_bearer_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_stocks_on_bearer_id' AND type='index'
+[0m
+  [1m[35m (9.4ms)[0m  [1m[35mCREATE  INDEX "index_stocks_on_deleted_at" ON "stocks" ("deleted_at")[0m
+  [1m[35m (0.2ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_stocks_on_deleted_at' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_stocks_on_deleted_at' AND type='index'
+[0m
+  [1m[35m (0.2ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_stocks_on_bearer_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_stocks_on_bearer_id' AND type='index'
+[0m
+  [1m[35m (10.5ms)[0m  [1m[35mCREATE  INDEX "index_stocks_on_market_price_id" ON "stocks" ("market_price_id")[0m
+  [1m[35m (10.0ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL PRIMARY KEY)[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT version FROM "schema_migrations"[0m
+  [1m[35m (7.6ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20170709161829)[0m
+  [1m[35m (7.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES
+(20170707120953),
+(20170707121253),
+(20170707121919);
+
+[0m
+  [1m[35m (10.3ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" varchar NOT NULL PRIMARY KEY, "value" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["key", "environment"], ["value", "development"], ["created_at", "2017-07-10 12:45:35.276559"], ["updated_at", "2017-07-10 12:45:35.276559"]]
+  [1m[35m (7.9ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.2ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mBearer Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "bearers" WHERE "bearers"."name" = ? LIMIT ?[0m  [["name", "Billy Bob"], ["LIMIT", 1]]
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "bearers" ("name", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["name", "Billy Bob"], ["created_at", "2017-07-10 12:45:35.339313"], ["updated_at", "2017-07-10 12:45:35.339313"]]
+  [1m[35m (7.5ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mBearer Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "bearers" WHERE "bearers"."name" = ? LIMIT ?[0m  [["name", "Georgie Porgie"], ["LIMIT", 1]]
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "bearers" ("name", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["name", "Georgie Porgie"], ["created_at", "2017-07-10 12:45:35.349729"], ["updated_at", "2017-07-10 12:45:35.349729"]]
+  [1m[35m (6.5ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mBearer Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "bearers" WHERE "bearers"."name" = ? LIMIT ?[0m  [["name", "Jon Snow"], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "bearers" ("name", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["name", "Jon Snow"], ["created_at", "2017-07-10 12:45:35.359431"], ["updated_at", "2017-07-10 12:45:35.359431"]]
+  [1m[35m (6.6ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mMarketPrice Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "market_prices" WHERE "market_prices"."currency" = ? AND "market_prices"."value_cents" = ? LIMIT ?[0m  [["currency", "USD"], ["value_cents", 150], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "market_prices" ("currency", "value_cents", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["currency", "USD"], ["value_cents", 150], ["created_at", "2017-07-10 12:45:35.383234"], ["updated_at", "2017-07-10 12:45:35.383234"]]
+  [1m[35m (6.5ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mMarketPrice Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "market_prices" WHERE "market_prices"."currency" = ? AND "market_prices"."value_cents" = ? LIMIT ?[0m  [["currency", "USD"], ["value_cents", 200], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "market_prices" ("currency", "value_cents", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["currency", "USD"], ["value_cents", 200], ["created_at", "2017-07-10 12:45:35.395087"], ["updated_at", "2017-07-10 12:45:35.395087"]]
+  [1m[35m (19.9ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.2ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mMarketPrice Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "market_prices" WHERE "market_prices"."currency" = ? AND "market_prices"."value_cents" = ? LIMIT ?[0m  [["currency", "EUR"], ["value_cents", 200], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "market_prices" ("currency", "value_cents", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["currency", "EUR"], ["value_cents", 200], ["created_at", "2017-07-10 12:45:35.420179"], ["updated_at", "2017-07-10 12:45:35.420179"]]
+  [1m[35m (6.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "stocks" ("name", "bearer_id", "market_price_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["name", "Microsoft"], ["bearer_id", 1], ["market_price_id", 1], ["created_at", "2017-07-10 12:45:35.457531"], ["updated_at", "2017-07-10 12:45:35.457531"]]
+  [1m[35m (7.3ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "stocks" ("name", "bearer_id", "market_price_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["name", "Microsoft"], ["bearer_id", 2], ["market_price_id", 1], ["created_at", "2017-07-10 12:45:35.467787"], ["updated_at", "2017-07-10 12:45:35.467787"]]
+  [1m[35m (7.2ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "stocks" ("name", "bearer_id", "market_price_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["name", "Microsoft"], ["bearer_id", 3], ["market_price_id", 1], ["created_at", "2017-07-10 12:45:35.478690"], ["updated_at", "2017-07-10 12:45:35.478690"]]
+  [1m[35m (7.5ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "stocks" ("name", "bearer_id", "market_price_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["name", "BMW Cars"], ["bearer_id", 2], ["market_price_id", 3], ["created_at", "2017-07-10 12:45:35.491106"], ["updated_at", "2017-07-10 12:45:35.491106"]]
+  [1m[35m (18.2ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "stocks" ("name", "bearer_id", "market_price_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["name", "BMW Cars"], ["bearer_id", 1], ["market_price_id", 3], ["created_at", "2017-07-10 12:45:35.514893"], ["updated_at", "2017-07-10 12:45:35.514893"]]
+  [1m[35m (7.6ms)[0m  [1m[36mcommit transaction[0m
+Started GET "/stocks/" for 127.0.0.1 at 2017-07-10 14:45:43 +0200
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by StocksController#index as JSON
+  Parameters: {"stock"=>{}}
+  Rendering stocks/index.json.jbuilder
+  [1m[36mStock Load (0.1ms)[0m  [1m[34mSELECT "stocks".* FROM "stocks" WHERE "stocks"."deleted_at" IS NULL[0m
+  [1m[36mMarketPrice Load (0.1ms)[0m  [1m[34mSELECT "market_prices".* FROM "market_prices" WHERE "market_prices"."id" IN (1, 3)[0m
+  [1m[36mBearer Load (0.1ms)[0m  [1m[34mSELECT "bearers".* FROM "bearers" WHERE "bearers"."id" IN (1, 2, 3)[0m
+  Rendered stocks/index.json.jbuilder (77.3ms)
+Completed 200 OK in 91ms (Views: 80.7ms | ActiveRecord: 1.9ms)
+
+
+Started POST "/stocks/" for 127.0.0.1 at 2017-07-10 14:46:06 +0200
+Processing by StocksController#create as JSON
+Completed 400 Bad Request in 1ms (ActiveRecord: 0.0ms)
+
+
+  
+ActionController::ParameterMissing (param is missing or the value is empty: stock):
+  
+app/controllers/stocks_controller.rb:31:in `stock_params'
+app/controllers/stocks_controller.rb:11:in `create'
+  Rendering /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout
+  Rendering /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_source.html.erb
+  Rendered /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_source.html.erb (2.0ms)
+  Rendering /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb
+  Rendered /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.0ms)
+  Rendering /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb
+  Rendered /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.7ms)
+  Rendered /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (19.4ms)
+Started POST "/stocks/" for 127.0.0.1 at 2017-07-10 14:51:06 +0200
+Processing by StocksController#create as JSON
+Completed 400 Bad Request in 0ms (ActiveRecord: 0.0ms)
+
+
+  
+ActionController::ParameterMissing (param is missing or the value is empty: stock):
+  
+app/controllers/stocks_controller.rb:31:in `stock_params'
+app/controllers/stocks_controller.rb:11:in `create'
+  Rendering /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout
+  Rendering /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_source.html.erb
+  Rendered /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_source.html.erb (1.9ms)
+  Rendering /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb
+  Rendered /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.0ms)
+  Rendering /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb
+  Rendered /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.7ms)
+  Rendered /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (16.8ms)
+Started POST "/stocks/" for 127.0.0.1 at 2017-07-10 14:51:36 +0200
+Error occurred while parsing request parameters.
+Contents:
+
+{ stock: { name: "invalid", bearer_name: "invalid", value_cents: 1939, currency: "EUR"} }
+  
+ActionDispatch::ParamsParser::ParseError (822: unexpected token at '{ stock: { name: "invalid", bearer_name: "invalid", value_cents: 1939, currency: "EUR"} }'):
+  
+actionpack (5.0.3) lib/action_dispatch/http/parameters.rb:88:in `rescue in parse_formatted_parameters'
+actionpack (5.0.3) lib/action_dispatch/http/parameters.rb:82:in `parse_formatted_parameters'
+actionpack (5.0.3) lib/action_dispatch/http/request.rb:354:in `block in POST'
+rack (2.0.2) lib/rack/request.rb:57:in `fetch'
+rack (2.0.2) lib/rack/request.rb:57:in `fetch_header'
+actionpack (5.0.3) lib/action_dispatch/http/request.rb:353:in `POST'
+actionpack (5.0.3) lib/action_controller/metal/params_wrapper.rb:282:in `_wrapper_enabled?'
+actionpack (5.0.3) lib/action_controller/metal/params_wrapper.rb:231:in `process_action'
+activerecord (5.0.3) lib/active_record/railties/controller_runtime.rb:18:in `process_action'
+actionpack (5.0.3) lib/abstract_controller/base.rb:126:in `process'
+actionview (5.0.3) lib/action_view/rendering.rb:30:in `process'
+actionpack (5.0.3) lib/action_controller/metal.rb:190:in `dispatch'
+actionpack (5.0.3) lib/action_controller/metal.rb:262:in `dispatch'
+actionpack (5.0.3) lib/action_dispatch/routing/route_set.rb:50:in `dispatch'
+actionpack (5.0.3) lib/action_dispatch/routing/route_set.rb:32:in `serve'
+actionpack (5.0.3) lib/action_dispatch/journey/router.rb:39:in `block in serve'
+actionpack (5.0.3) lib/action_dispatch/journey/router.rb:26:in `each'
+actionpack (5.0.3) lib/action_dispatch/journey/router.rb:26:in `serve'
+actionpack (5.0.3) lib/action_dispatch/routing/route_set.rb:725:in `call'
+rack (2.0.2) lib/rack/etag.rb:25:in `call'
+rack (2.0.2) lib/rack/conditional_get.rb:38:in `call'
+rack (2.0.2) lib/rack/head.rb:12:in `call'
+rack (2.0.2) lib/rack/session/abstract/id.rb:232:in `context'
+rack (2.0.2) lib/rack/session/abstract/id.rb:226:in `call'
+actionpack (5.0.3) lib/action_dispatch/middleware/cookies.rb:613:in `call'
+activerecord (5.0.3) lib/active_record/migration.rb:553:in `call'
+actionpack (5.0.3) lib/action_dispatch/middleware/callbacks.rb:38:in `block in call'
+activesupport (5.0.3) lib/active_support/callbacks.rb:97:in `__run_callbacks__'
+activesupport (5.0.3) lib/active_support/callbacks.rb:750:in `_run_call_callbacks'
+activesupport (5.0.3) lib/active_support/callbacks.rb:90:in `run_callbacks'
+actionpack (5.0.3) lib/action_dispatch/middleware/callbacks.rb:36:in `call'
+actionpack (5.0.3) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.0.3) lib/action_dispatch/middleware/remote_ip.rb:79:in `call'
+actionpack (5.0.3) lib/action_dispatch/middleware/debug_exceptions.rb:49:in `call'
+web-console (3.5.1) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.5.1) lib/web_console/middleware.rb:28:in `block in call'
+web-console (3.5.1) lib/web_console/middleware.rb:18:in `catch'
+web-console (3.5.1) lib/web_console/middleware.rb:18:in `call'
+actionpack (5.0.3) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.0.3) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.0.3) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.0.3) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.0.3) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.0.3) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.0.3) lib/rails/rack/logger.rb:24:in `call'
+sprockets-rails (3.2.0) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (5.0.3) lib/action_dispatch/middleware/request_id.rb:24:in `call'
+rack (2.0.2) lib/rack/method_override.rb:22:in `call'
+rack (2.0.2) lib/rack/runtime.rb:22:in `call'
+activesupport (5.0.3) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+actionpack (5.0.3) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.0.3) lib/action_dispatch/middleware/static.rb:136:in `call'
+rack (2.0.2) lib/rack/sendfile.rb:111:in `call'
+railties (5.0.3) lib/rails/engine.rb:522:in `call'
+puma (3.8.2) lib/puma/configuration.rb:224:in `call'
+puma (3.8.2) lib/puma/server.rb:600:in `handle_request'
+puma (3.8.2) lib/puma/server.rb:435:in `process_client'
+puma (3.8.2) lib/puma/server.rb:299:in `block in run'
+puma (3.8.2) lib/puma/thread_pool.rb:120:in `block in spawn_thread'
+  Rendering /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout
+  Rendering /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_source.html.erb
+  Rendered /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_source.html.erb (1.7ms)
+  Rendering /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb
+  Rendered /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (3.7ms)
+  Rendering /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb
+  Rendered /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.8ms)
+  Rendered /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (19.4ms)
+Started POST "/stocks/" for 127.0.0.1 at 2017-07-10 14:52:31 +0200
+Error occurred while parsing request parameters.
+Contents:
+
+{ "stock": { name: "invalid", bearer_name: "invalid", value_cents: 1939, currency: "EUR"} }
+  
+ActionDispatch::ParamsParser::ParseError (822: unexpected token at '{ "stock": { name: "invalid", bearer_name: "invalid", value_cents: 1939, currency: "EUR"} }'):
+  
+actionpack (5.0.3) lib/action_dispatch/http/parameters.rb:88:in `rescue in parse_formatted_parameters'
+actionpack (5.0.3) lib/action_dispatch/http/parameters.rb:82:in `parse_formatted_parameters'
+actionpack (5.0.3) lib/action_dispatch/http/request.rb:354:in `block in POST'
+rack (2.0.2) lib/rack/request.rb:57:in `fetch'
+rack (2.0.2) lib/rack/request.rb:57:in `fetch_header'
+actionpack (5.0.3) lib/action_dispatch/http/request.rb:353:in `POST'
+actionpack (5.0.3) lib/action_controller/metal/params_wrapper.rb:282:in `_wrapper_enabled?'
+actionpack (5.0.3) lib/action_controller/metal/params_wrapper.rb:231:in `process_action'
+activerecord (5.0.3) lib/active_record/railties/controller_runtime.rb:18:in `process_action'
+actionpack (5.0.3) lib/abstract_controller/base.rb:126:in `process'
+actionview (5.0.3) lib/action_view/rendering.rb:30:in `process'
+actionpack (5.0.3) lib/action_controller/metal.rb:190:in `dispatch'
+actionpack (5.0.3) lib/action_controller/metal.rb:262:in `dispatch'
+actionpack (5.0.3) lib/action_dispatch/routing/route_set.rb:50:in `dispatch'
+actionpack (5.0.3) lib/action_dispatch/routing/route_set.rb:32:in `serve'
+actionpack (5.0.3) lib/action_dispatch/journey/router.rb:39:in `block in serve'
+actionpack (5.0.3) lib/action_dispatch/journey/router.rb:26:in `each'
+actionpack (5.0.3) lib/action_dispatch/journey/router.rb:26:in `serve'
+actionpack (5.0.3) lib/action_dispatch/routing/route_set.rb:725:in `call'
+rack (2.0.2) lib/rack/etag.rb:25:in `call'
+rack (2.0.2) lib/rack/conditional_get.rb:38:in `call'
+rack (2.0.2) lib/rack/head.rb:12:in `call'
+rack (2.0.2) lib/rack/session/abstract/id.rb:232:in `context'
+rack (2.0.2) lib/rack/session/abstract/id.rb:226:in `call'
+actionpack (5.0.3) lib/action_dispatch/middleware/cookies.rb:613:in `call'
+activerecord (5.0.3) lib/active_record/migration.rb:553:in `call'
+actionpack (5.0.3) lib/action_dispatch/middleware/callbacks.rb:38:in `block in call'
+activesupport (5.0.3) lib/active_support/callbacks.rb:97:in `__run_callbacks__'
+activesupport (5.0.3) lib/active_support/callbacks.rb:750:in `_run_call_callbacks'
+activesupport (5.0.3) lib/active_support/callbacks.rb:90:in `run_callbacks'
+actionpack (5.0.3) lib/action_dispatch/middleware/callbacks.rb:36:in `call'
+actionpack (5.0.3) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.0.3) lib/action_dispatch/middleware/remote_ip.rb:79:in `call'
+actionpack (5.0.3) lib/action_dispatch/middleware/debug_exceptions.rb:49:in `call'
+web-console (3.5.1) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.5.1) lib/web_console/middleware.rb:28:in `block in call'
+web-console (3.5.1) lib/web_console/middleware.rb:18:in `catch'
+web-console (3.5.1) lib/web_console/middleware.rb:18:in `call'
+actionpack (5.0.3) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.0.3) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.0.3) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.0.3) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.0.3) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.0.3) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.0.3) lib/rails/rack/logger.rb:24:in `call'
+sprockets-rails (3.2.0) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (5.0.3) lib/action_dispatch/middleware/request_id.rb:24:in `call'
+rack (2.0.2) lib/rack/method_override.rb:22:in `call'
+rack (2.0.2) lib/rack/runtime.rb:22:in `call'
+activesupport (5.0.3) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+actionpack (5.0.3) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.0.3) lib/action_dispatch/middleware/static.rb:136:in `call'
+rack (2.0.2) lib/rack/sendfile.rb:111:in `call'
+railties (5.0.3) lib/rails/engine.rb:522:in `call'
+puma (3.8.2) lib/puma/configuration.rb:224:in `call'
+puma (3.8.2) lib/puma/server.rb:600:in `handle_request'
+puma (3.8.2) lib/puma/server.rb:435:in `process_client'
+puma (3.8.2) lib/puma/server.rb:299:in `block in run'
+puma (3.8.2) lib/puma/thread_pool.rb:120:in `block in spawn_thread'
+  Rendering /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout
+  Rendering /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_source.html.erb
+  Rendered /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_source.html.erb (1.5ms)
+  Rendering /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb
+  Rendered /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (0.9ms)
+  Rendering /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb
+  Rendered /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.6ms)
+  Rendered /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (15.5ms)
+Started POST "/stocks/" for 127.0.0.1 at 2017-07-10 14:53:00 +0200
+Processing by StocksController#create as JSON
+  Parameters: {"stock"=>{"name"=>"invalid", "bearer_name"=>"invalid", "value_cents"=>1939, "currency"=>"EUR"}}
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mBearer Load (0.2ms)[0m  [1m[34mSELECT  "bearers".* FROM "bearers" WHERE "bearers"."name" = ? ORDER BY "bearers"."id" ASC LIMIT ?[0m  [["name", "invalid"], ["LIMIT", 1]]
+  [1m[36mBearer Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "bearers" WHERE "bearers"."name" = ? LIMIT ?[0m  [["name", "invalid"], ["LIMIT", 1]]
+  [1m[36mMarketPrice Load (0.1ms)[0m  [1m[34mSELECT  "market_prices".* FROM "market_prices" WHERE "market_prices"."value_cents" = ? AND "market_prices"."currency" = ? ORDER BY "market_prices"."id" ASC LIMIT ?[0m  [["value_cents", 1939], ["currency", "EUR"], ["LIMIT", 1]]
+  [1m[36mMarketPrice Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "market_prices" WHERE "market_prices"."currency" = ? AND "market_prices"."value_cents" = ? LIMIT ?[0m  [["currency", "EUR"], ["value_cents", 1939], ["LIMIT", 1]]
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "market_prices" ("currency", "value_cents", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["currency", "EUR"], ["value_cents", 1939], ["created_at", "2017-07-10 12:53:00.583950"], ["updated_at", "2017-07-10 12:53:00.583950"]]
+  [1m[35m (0.1ms)[0m  [1m[31mrollback transaction[0m
+Completed 422 Unprocessable Entity in 18ms (Views: 0.2ms | ActiveRecord: 0.8ms)
+
+
+Started POST "/stocks/" for 127.0.0.1 at 2017-07-10 14:53:17 +0200
+Processing by StocksController#create as JSON
+  Parameters: {"stock"=>{"name"=>"cool", "bearer_name"=>"invalid", "value_cents"=>1939, "currency"=>"EUR"}}
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mBearer Load (0.1ms)[0m  [1m[34mSELECT  "bearers".* FROM "bearers" WHERE "bearers"."name" = ? ORDER BY "bearers"."id" ASC LIMIT ?[0m  [["name", "invalid"], ["LIMIT", 1]]
+  [1m[36mBearer Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "bearers" WHERE "bearers"."name" = ? LIMIT ?[0m  [["name", "invalid"], ["LIMIT", 1]]
+  [1m[36mMarketPrice Load (0.1ms)[0m  [1m[34mSELECT  "market_prices".* FROM "market_prices" WHERE "market_prices"."value_cents" = ? AND "market_prices"."currency" = ? ORDER BY "market_prices"."id" ASC LIMIT ?[0m  [["value_cents", 1939], ["currency", "EUR"], ["LIMIT", 1]]
+  [1m[36mMarketPrice Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "market_prices" WHERE "market_prices"."currency" = ? AND "market_prices"."value_cents" = ? LIMIT ?[0m  [["currency", "EUR"], ["value_cents", 1939], ["LIMIT", 1]]
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "market_prices" ("currency", "value_cents", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["currency", "EUR"], ["value_cents", 1939], ["created_at", "2017-07-10 12:53:17.478938"], ["updated_at", "2017-07-10 12:53:17.478938"]]
+  [1m[36mBearer Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "bearers" WHERE "bearers"."name" = ? LIMIT ?[0m  [["name", "invalid"], ["LIMIT", 1]]
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "stocks" ("name", "market_price_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "cool"], ["market_price_id", 4], ["created_at", "2017-07-10 12:53:17.481497"], ["updated_at", "2017-07-10 12:53:17.481497"]]
+  [1m[35m (7.1ms)[0m  [1m[36mcommit transaction[0m
+  Rendering stocks/show.json.jbuilder
+  Rendered stocks/show.json.jbuilder (0.4ms)
+Completed 201 Created in 28ms (Views: 12.7ms | ActiveRecord: 8.3ms)
+
+
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mBearer Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "bearers" WHERE "bearers"."name" = ? LIMIT ?[0m  [["name", "invalid"], ["LIMIT", 1]]
+  [1m[35m (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mBearer Load (0.2ms)[0m  [1m[34mSELECT  "bearers".* FROM "bearers" WHERE "bearers"."name" = ? ORDER BY "bearers"."id" ASC LIMIT ?[0m  [["name", "invalid"], ["LIMIT", 1]]
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mBearer Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "bearers" WHERE "bearers"."name" = ? LIMIT ?[0m  [["name", "invalid"], ["LIMIT", 1]]
+  [1m[35m (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mBearer Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "bearers" WHERE "bearers"."name" = ? LIMIT ?[0m  [["name", "invalid"], ["LIMIT", 1]]
+  [1m[35m (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.2ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.2ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.2ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mMarketPrice Load (0.8ms)[0m  [1m[34mSELECT  "market_prices".* FROM "market_prices" WHERE "market_prices"."value_cents" = ? AND "market_prices"."currency" = ? ORDER BY "market_prices"."id" ASC LIMIT ?[0m  [["value_cents", 123], ["currency", "usd"], ["LIMIT", 1]]
+  [1m[36mMarketPrice Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "market_prices" WHERE "market_prices"."currency" = ? AND "market_prices"."value_cents" = ? LIMIT ?[0m  [["currency", "usd"], ["value_cents", 123], ["LIMIT", 1]]
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "market_prices" ("currency", "value_cents", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["currency", "usd"], ["value_cents", 123], ["created_at", "2017-07-10 12:58:20.580583"], ["updated_at", "2017-07-10 12:58:20.580583"]]
+  [1m[35m (0.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mBearer Load (0.1ms)[0m  [1m[34mSELECT  "bearers".* FROM "bearers" WHERE "bearers"."name" = ? ORDER BY "bearers"."id" ASC LIMIT ?[0m  [["name", "invalid"], ["LIMIT", 1]]
+  [1m[36mBearer Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "bearers" WHERE "bearers"."name" = ? LIMIT ?[0m  [["name", "invalid"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[31mrollback transaction[0m
+Started POST "/stocks/" for 127.0.0.1 at 2017-07-10 15:07:18 +0200
+Processing by StocksController#create as JSON
+  Parameters: {"stock"=>{"name"=>"cool", "bearer_name"=>"invalid", "value_cents"=>1939, "currency"=>"EUR"}}
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mBearer Load (0.1ms)[0m  [1m[34mSELECT  "bearers".* FROM "bearers" WHERE "bearers"."name" = ? ORDER BY "bearers"."id" ASC LIMIT ?[0m  [["name", "invalid"], ["LIMIT", 1]]
+  [1m[36mBearer Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "bearers" WHERE "bearers"."name" = ? LIMIT ?[0m  [["name", "invalid"], ["LIMIT", 1]]
+  [1m[36mMarketPrice Load (0.1ms)[0m  [1m[34mSELECT  "market_prices".* FROM "market_prices" WHERE "market_prices"."value_cents" = ? AND "market_prices"."currency" = ? ORDER BY "market_prices"."id" ASC LIMIT ?[0m  [["value_cents", 1939], ["currency", "EUR"], ["LIMIT", 1]]
+  [1m[35m (0.0ms)[0m  [1m[31mrollback transaction[0m
+Completed 422 Unprocessable Entity in 19ms (Views: 0.2ms | ActiveRecord: 1.4ms)
+
+
+Started POST "/stocks/" for 127.0.0.1 at 2017-07-10 15:07:26 +0200
+Processing by StocksController#create as JSON
+  Parameters: {"stock"=>{"name"=>"cool", "bearer_name"=>"spencer", "value_cents"=>1939, "currency"=>"EUR"}}
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mBearer Load (0.1ms)[0m  [1m[34mSELECT  "bearers".* FROM "bearers" WHERE "bearers"."name" = ? ORDER BY "bearers"."id" ASC LIMIT ?[0m  [["name", "spencer"], ["LIMIT", 1]]
+  [1m[36mBearer Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "bearers" WHERE "bearers"."name" = ? LIMIT ?[0m  [["name", "spencer"], ["LIMIT", 1]]
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO "bearers" ("name", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["name", "spencer"], ["created_at", "2017-07-10 13:07:26.364609"], ["updated_at", "2017-07-10 13:07:26.364609"]]
+  [1m[36mMarketPrice Load (0.1ms)[0m  [1m[34mSELECT  "market_prices".* FROM "market_prices" WHERE "market_prices"."value_cents" = ? AND "market_prices"."currency" = ? ORDER BY "market_prices"."id" ASC LIMIT ?[0m  [["value_cents", 1939], ["currency", "EUR"], ["LIMIT", 1]]
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO "stocks" ("name", "bearer_id", "market_price_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["name", "cool"], ["bearer_id", 4], ["market_price_id", 4], ["created_at", "2017-07-10 13:07:26.366909"], ["updated_at", "2017-07-10 13:07:26.366909"]]
+  [1m[35m (7.1ms)[0m  [1m[36mcommit transaction[0m
+  Rendering stocks/show.json.jbuilder
+  Rendered stocks/show.json.jbuilder (0.5ms)
+Completed 201 Created in 16ms (Views: 2.2ms | ActiveRecord: 7.7ms)
+
+
+Started GET "/stocks/" for 127.0.0.1 at 2017-07-10 15:19:53 +0200
+Processing by StocksController#index as JSON
+  Parameters: {"stock"=>{}}
+  Rendering stocks/index.json.jbuilder
+  [1m[36mStock Load (0.1ms)[0m  [1m[34mSELECT "stocks".* FROM "stocks" WHERE "stocks"."deleted_at" IS NULL[0m
+  [1m[36mMarketPrice Load (0.1ms)[0m  [1m[34mSELECT "market_prices".* FROM "market_prices" WHERE "market_prices"."id" IN (1, 3, 4)[0m
+  [1m[36mBearer Load (0.1ms)[0m  [1m[34mSELECT "bearers".* FROM "bearers" WHERE "bearers"."id" IN (1, 2, 3, 4)[0m
+  Rendered stocks/index.json.jbuilder (24.1ms)
+Completed 500 Internal Server Error in 27ms (ActiveRecord: 1.5ms)
+
+
+  
+ActionView::Template::Error (undefined method `name' for nil:NilClass):
+    1: json.array! @stocks do |stock|
+    2:   json.stock_name stock.name
+    3:   json.extract! stock.market_price, :value_cents, :currency
+    4:   json.bearer stock.bearer.name
+    5: end
+  
+app/views/stocks/index.json.jbuilder:4:in `block in _app_views_stocks_index_json_jbuilder___2266039149860186828_47121998338740'
+app/views/stocks/index.json.jbuilder:1:in `_app_views_stocks_index_json_jbuilder___2266039149860186828_47121998338740'
+  Rendering /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout
+  Rendering /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_source.html.erb
+  Rendered /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_source.html.erb (2.5ms)
+  Rendering /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb
+  Rendered /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.3ms)
+  Rendering /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb
+  Rendered /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.6ms)
+  Rendered /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (16.6ms)
+Started GET "/stocks/" for 127.0.0.1 at 2017-07-10 15:20:15 +0200
+Processing by StocksController#index as JSON
+  Parameters: {"stock"=>{}}
+  Rendering stocks/index.json.jbuilder
+  [1m[36mStock Load (0.2ms)[0m  [1m[34mSELECT "stocks".* FROM "stocks" WHERE "stocks"."deleted_at" IS NULL[0m
+  [1m[36mMarketPrice Load (0.1ms)[0m  [1m[34mSELECT "market_prices".* FROM "market_prices" WHERE "market_prices"."id" IN (1, 3, 4)[0m
+  [1m[36mBearer Load (0.1ms)[0m  [1m[34mSELECT "bearers".* FROM "bearers" WHERE "bearers"."id" IN (1, 2, 3, 4)[0m
+  Rendered stocks/index.json.jbuilder (4.5ms)
+Completed 500 Internal Server Error in 7ms (ActiveRecord: 0.4ms)
+
+
+  
+ActionView::Template::Error (undefined method `name' for nil:NilClass):
+    1: json.array! @stocks do |stock|
+    2:   json.stock_name stock.name
+    3:   json.extract! stock.market_price, :value_cents, :currency
+    4:   json.bearer stock.bearer.name
+    5: end
+  
+app/views/stocks/index.json.jbuilder:4:in `block in _app_views_stocks_index_json_jbuilder___2266039149860186828_70343948960580'
+app/views/stocks/index.json.jbuilder:1:in `_app_views_stocks_index_json_jbuilder___2266039149860186828_70343948960580'
+  Rendering /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout
+  Rendering /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_source.html.erb
+  Rendered /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_source.html.erb (2.5ms)
+  Rendering /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb
+  Rendered /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.3ms)
+  Rendering /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb
+  Rendered /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.6ms)
+  Rendered /usr/local/opt/rbenv/versions/2.3.3/lib/ruby/gems/2.3.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (16.5ms)
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ?[0m  [["key", "environment"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.0ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ?[0m  [["key", "environment"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.0ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ?[0m  [["key", "environment"]]
+  [1m[35m (8.2ms)[0m  [1m[35mCREATE TABLE "bearers" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  [1m[35m (8.5ms)[0m  [1m[35mCREATE TABLE "market_prices" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "currency" varchar, "value_cents" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  [1m[35m (10.9ms)[0m  [1m[35mCREATE TABLE "stocks" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "bearer_id" integer, "market_price_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, "deleted_at" datetime)[0m
+  [1m[35m (0.2ms)[0m  [1m[34mselect sqlite_version(*)[0m
+  [1m[35m (10.3ms)[0m  [1m[35mCREATE  INDEX "index_stocks_on_bearer_id" ON "stocks" ("bearer_id")[0m
+  [1m[35m (0.3ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_stocks_on_bearer_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_stocks_on_bearer_id' AND type='index'
+[0m
+  [1m[35m (9.6ms)[0m  [1m[35mCREATE  INDEX "index_stocks_on_deleted_at" ON "stocks" ("deleted_at")[0m
+  [1m[35m (0.2ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_stocks_on_deleted_at' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_stocks_on_deleted_at' AND type='index'
+[0m
+  [1m[35m (0.2ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_stocks_on_bearer_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_stocks_on_bearer_id' AND type='index'
+[0m
+  [1m[35m (10.0ms)[0m  [1m[35mCREATE  INDEX "index_stocks_on_market_price_id" ON "stocks" ("market_price_id")[0m
+  [1m[35m (9.9ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL PRIMARY KEY)[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT version FROM "schema_migrations"[0m
+  [1m[35m (6.8ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20170709161829)[0m
+  [1m[35m (8.8ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES
+(20170707120953),
+(20170707121253),
+(20170707121919);
+
+[0m
+  [1m[35m (9.9ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" varchar NOT NULL PRIMARY KEY, "value" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["key", "environment"], ["value", "development"], ["created_at", "2017-07-10 13:20:49.478287"], ["updated_at", "2017-07-10 13:20:49.478287"]]
+  [1m[35m (7.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (8.7ms)[0m  [1m[35mCREATE TABLE "bearers" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  [1m[35m (9.1ms)[0m  [1m[35mCREATE TABLE "market_prices" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "currency" varchar, "value_cents" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  [1m[35m (10.5ms)[0m  [1m[35mCREATE TABLE "stocks" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "bearer_id" integer, "market_price_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, "deleted_at" datetime)[0m
+  [1m[35m (0.2ms)[0m  [1m[34mselect sqlite_version(*)[0m
+  [1m[35m (9.9ms)[0m  [1m[35mCREATE  INDEX "index_stocks_on_bearer_id" ON "stocks" ("bearer_id")[0m
+  [1m[35m (0.3ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_stocks_on_bearer_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_stocks_on_bearer_id' AND type='index'
+[0m
+  [1m[35m (9.4ms)[0m  [1m[35mCREATE  INDEX "index_stocks_on_deleted_at" ON "stocks" ("deleted_at")[0m
+  [1m[35m (0.2ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_stocks_on_deleted_at' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_stocks_on_deleted_at' AND type='index'
+[0m
+  [1m[35m (0.2ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_stocks_on_bearer_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_stocks_on_bearer_id' AND type='index'
+[0m
+  [1m[35m (15.5ms)[0m  [1m[35mCREATE  INDEX "index_stocks_on_market_price_id" ON "stocks" ("market_price_id")[0m
+  [1m[35m (9.4ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL PRIMARY KEY)[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT version FROM "schema_migrations"[0m
+  [1m[35m (7.8ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20170709161829)[0m
+  [1m[35m (7.6ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES
+(20170707120953),
+(20170707121253),
+(20170707121919);
+
+[0m
+  [1m[35m (10.3ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" varchar NOT NULL PRIMARY KEY, "value" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["key", "environment"], ["value", "development"], ["created_at", "2017-07-10 13:20:49.618989"], ["updated_at", "2017-07-10 13:20:49.618989"]]
+  [1m[35m (7.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.2ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mBearer Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "bearers" WHERE "bearers"."name" = ? LIMIT ?[0m  [["name", "Billy Bob"], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "bearers" ("name", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["name", "Billy Bob"], ["created_at", "2017-07-10 13:20:49.666116"], ["updated_at", "2017-07-10 13:20:49.666116"]]
+  [1m[35m (6.5ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mBearer Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "bearers" WHERE "bearers"."name" = ? LIMIT ?[0m  [["name", "Georgie Porgie"], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "bearers" ("name", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["name", "Georgie Porgie"], ["created_at", "2017-07-10 13:20:49.676566"], ["updated_at", "2017-07-10 13:20:49.676566"]]
+  [1m[35m (7.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mBearer Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "bearers" WHERE "bearers"."name" = ? LIMIT ?[0m  [["name", "Jon Snow"], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "bearers" ("name", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["name", "Jon Snow"], ["created_at", "2017-07-10 13:20:49.688242"], ["updated_at", "2017-07-10 13:20:49.688242"]]
+  [1m[35m (7.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mMarketPrice Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "market_prices" WHERE "market_prices"."currency" = ? AND "market_prices"."value_cents" = ? LIMIT ?[0m  [["currency", "USD"], ["value_cents", 150], ["LIMIT", 1]]
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "market_prices" ("currency", "value_cents", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["currency", "USD"], ["value_cents", 150], ["created_at", "2017-07-10 13:20:49.712433"], ["updated_at", "2017-07-10 13:20:49.712433"]]
+  [1m[35m (6.2ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mMarketPrice Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "market_prices" WHERE "market_prices"."currency" = ? AND "market_prices"."value_cents" = ? LIMIT ?[0m  [["currency", "USD"], ["value_cents", 200], ["LIMIT", 1]]
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "market_prices" ("currency", "value_cents", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["currency", "USD"], ["value_cents", 200], ["created_at", "2017-07-10 13:20:49.721852"], ["updated_at", "2017-07-10 13:20:49.721852"]]
+  [1m[35m (6.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mMarketPrice Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "market_prices" WHERE "market_prices"."currency" = ? AND "market_prices"."value_cents" = ? LIMIT ?[0m  [["currency", "EUR"], ["value_cents", 200], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "market_prices" ("currency", "value_cents", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["currency", "EUR"], ["value_cents", 200], ["created_at", "2017-07-10 13:20:49.732655"], ["updated_at", "2017-07-10 13:20:49.732655"]]
+  [1m[35m (6.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "stocks" ("name", "bearer_id", "market_price_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["name", "Microsoft"], ["bearer_id", 1], ["market_price_id", 1], ["created_at", "2017-07-10 13:20:49.772098"], ["updated_at", "2017-07-10 13:20:49.772098"]]
+  [1m[35m (8.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "stocks" ("name", "bearer_id", "market_price_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["name", "Microsoft"], ["bearer_id", 2], ["market_price_id", 1], ["created_at", "2017-07-10 13:20:49.782781"], ["updated_at", "2017-07-10 13:20:49.782781"]]
+  [1m[35m (7.3ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "stocks" ("name", "bearer_id", "market_price_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["name", "Microsoft"], ["bearer_id", 3], ["market_price_id", 1], ["created_at", "2017-07-10 13:20:49.792398"], ["updated_at", "2017-07-10 13:20:49.792398"]]
+  [1m[35m (7.3ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "stocks" ("name", "bearer_id", "market_price_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["name", "BMW Cars"], ["bearer_id", 2], ["market_price_id", 3], ["created_at", "2017-07-10 13:20:49.802102"], ["updated_at", "2017-07-10 13:20:49.802102"]]
+  [1m[35m (7.5ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "stocks" ("name", "bearer_id", "market_price_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["name", "BMW Cars"], ["bearer_id", 1], ["market_price_id", 3], ["created_at", "2017-07-10 13:20:49.811433"], ["updated_at", "2017-07-10 13:20:49.811433"]]
+  [1m[35m (7.2ms)[0m  [1m[36mcommit transaction[0m
+Started GET "/stocks/" for 127.0.0.1 at 2017-07-10 15:21:02 +0200
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by StocksController#index as JSON
+  Parameters: {"stock"=>{}}
+  Rendering stocks/index.json.jbuilder
+  [1m[36mStock Load (0.1ms)[0m  [1m[34mSELECT "stocks".* FROM "stocks" WHERE "stocks"."deleted_at" IS NULL[0m
+  [1m[36mMarketPrice Load (0.1ms)[0m  [1m[34mSELECT "market_prices".* FROM "market_prices" WHERE "market_prices"."id" IN (1, 3)[0m
+  [1m[36mBearer Load (0.2ms)[0m  [1m[34mSELECT "bearers".* FROM "bearers" WHERE "bearers"."id" IN (1, 2, 3)[0m
+  Rendered stocks/index.json.jbuilder (24.4ms)
+Completed 200 OK in 37ms (Views: 27.0ms | ActiveRecord: 1.7ms)
+
+
+Started POST "/stocks/" for 127.0.0.1 at 2017-07-10 15:21:21 +0200
+Processing by StocksController#create as JSON
+  Parameters: {"stock"=>{"name"=>"cool", "bearer_name"=>"spencer", "value_cents"=>1939, "currency"=>"EUR"}}
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mBearer Load (0.2ms)[0m  [1m[34mSELECT  "bearers".* FROM "bearers" WHERE "bearers"."name" = ? ORDER BY "bearers"."id" ASC LIMIT ?[0m  [["name", "spencer"], ["LIMIT", 1]]
+  [1m[36mBearer Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM "bearers" WHERE "bearers"."name" = ? LIMIT ?[0m  [["name", "spencer"], ["LIMIT", 1]]
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "bearers" ("name", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["name", "spencer"], ["created_at", "2017-07-10 13:21:21.528002"], ["updated_at", "2017-07-10 13:21:21.528002"]]
+  [1m[36mMarketPrice Load (0.2ms)[0m  [1m[34mSELECT  "market_prices".* FROM "market_prices" WHERE "market_prices"."value_cents" = ? AND "market_prices"."currency" = ? ORDER BY "market_prices"."id" ASC LIMIT ?[0m  [["value_cents", 1939], ["currency", "EUR"], ["LIMIT", 1]]
+  [1m[36mMarketPrice Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "market_prices" WHERE "market_prices"."currency" = ? AND "market_prices"."value_cents" = ? LIMIT ?[0m  [["currency", "EUR"], ["value_cents", 1939], ["LIMIT", 1]]
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO "market_prices" ("currency", "value_cents", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["currency", "EUR"], ["value_cents", 1939], ["created_at", "2017-07-10 13:21:21.533800"], ["updated_at", "2017-07-10 13:21:21.533800"]]
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO "stocks" ("name", "bearer_id", "market_price_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["name", "cool"], ["bearer_id", 4], ["market_price_id", 4], ["created_at", "2017-07-10 13:21:21.535759"], ["updated_at", "2017-07-10 13:21:21.535759"]]
+  [1m[35m (7.1ms)[0m  [1m[36mcommit transaction[0m
+  Rendering stocks/show.json.jbuilder
+  Rendered stocks/show.json.jbuilder (0.7ms)
+Completed 201 Created in 30ms (Views: 2.3ms | ActiveRecord: 8.4ms)
+
+
+Started GET "/stocks/" for 127.0.0.1 at 2017-07-10 15:21:31 +0200
+Processing by StocksController#index as JSON
+  Parameters: {"stock"=>{}}
+  Rendering stocks/index.json.jbuilder
+  [1m[36mStock Load (0.1ms)[0m  [1m[34mSELECT "stocks".* FROM "stocks" WHERE "stocks"."deleted_at" IS NULL[0m
+  [1m[36mMarketPrice Load (0.1ms)[0m  [1m[34mSELECT "market_prices".* FROM "market_prices" WHERE "market_prices"."id" IN (1, 3, 4)[0m
+  [1m[36mBearer Load (0.1ms)[0m  [1m[34mSELECT "bearers".* FROM "bearers" WHERE "bearers"."id" IN (1, 2, 3, 4)[0m
+  Rendered stocks/index.json.jbuilder (4.6ms)
+Completed 200 OK in 7ms (Views: 5.7ms | ActiveRecord: 0.4ms)
+
+
+Started PATCH "/stocks/1/" for 127.0.0.1 at 2017-07-10 15:22:16 +0200
+Processing by StocksController#update as JSON
+  Parameters: {"stock"=>{"bearer_name"=>"Billy Bob"}, "id"=>"1"}
+  [1m[36mStock Load (0.1ms)[0m  [1m[34mSELECT  "stocks".* FROM "stocks" WHERE "stocks"."deleted_at" IS NULL AND "stocks"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mBearer Load (0.1ms)[0m  [1m[34mSELECT  "bearers".* FROM "bearers" WHERE "bearers"."name" = ? ORDER BY "bearers"."id" ASC LIMIT ?[0m  [["name", "Billy Bob"], ["LIMIT", 1]]
+  [1m[36mMarketPrice Load (0.1ms)[0m  [1m[34mSELECT  "market_prices".* FROM "market_prices" WHERE "market_prices"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mcommit transaction[0m
+  Rendering stocks/show.json.jbuilder
+  Rendered stocks/show.json.jbuilder (0.9ms)
+Completed 200 OK in 11ms (Views: 2.7ms | ActiveRecord: 0.4ms)
+
+
+Started POST "/stocks/" for 127.0.0.1 at 2017-07-10 15:22:38 +0200
+Processing by StocksController#create as JSON
+  Parameters: {"stock"=>{"name"=>"cool", "value_cents"=>1939, "currency"=>"EUR"}}
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mMarketPrice Load (0.1ms)[0m  [1m[34mSELECT  "market_prices".* FROM "market_prices" WHERE "market_prices"."value_cents" = ? AND "market_prices"."currency" = ? ORDER BY "market_prices"."id" ASC LIMIT ?[0m  [["value_cents", 1939], ["currency", "EUR"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[31mrollback transaction[0m
+Completed 422 Unprocessable Entity in 9ms (Views: 0.5ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/stocks/" for 127.0.0.1 at 2017-07-10 15:22:46 +0200
+Processing by StocksController#index as JSON
+  Parameters: {"stock"=>{}}
+  Rendering stocks/index.json.jbuilder
+  [1m[36mStock Load (0.1ms)[0m  [1m[34mSELECT "stocks".* FROM "stocks" WHERE "stocks"."deleted_at" IS NULL[0m
+  [1m[36mMarketPrice Load (0.2ms)[0m  [1m[34mSELECT "market_prices".* FROM "market_prices" WHERE "market_prices"."id" IN (1, 3, 4)[0m
+  [1m[36mBearer Load (0.1ms)[0m  [1m[34mSELECT "bearers".* FROM "bearers" WHERE "bearers"."id" IN (1, 2, 3, 4)[0m
+  Rendered stocks/index.json.jbuilder (4.6ms)
+Completed 200 OK in 7ms (Views: 5.6ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/stocks/" for 127.0.0.1 at 2017-07-10 15:32:47 +0200
+Processing by StocksController#index as JSON
+  Parameters: {"stock"=>{}}
+  Rendering stocks/index.json.jbuilder
+  [1m[36mStock Load (0.2ms)[0m  [1m[34mSELECT "stocks".* FROM "stocks" WHERE "stocks"."deleted_at" IS NULL[0m
+  [1m[36mMarketPrice Load (0.1ms)[0m  [1m[34mSELECT "market_prices".* FROM "market_prices" WHERE "market_prices"."id" IN (1, 3, 4)[0m
+  [1m[36mBearer Load (0.1ms)[0m  [1m[34mSELECT "bearers".* FROM "bearers" WHERE "bearers"."id" IN (1, 2, 3, 4)[0m
+  Rendered stocks/index.json.jbuilder (16.5ms)
+Completed 200 OK in 19ms (Views: 16.8ms | ActiveRecord: 1.7ms)
+
+
