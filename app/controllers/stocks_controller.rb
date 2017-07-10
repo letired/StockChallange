@@ -1,5 +1,7 @@
 class StocksController < ApplicationController
   def index
+    # This style of loading will load the relevant data for market price and bearer as well,
+    # no more N+1!  I couldn't figure out how to do this in a single SQL query though.
     @stocks = Stock.all.includes(:market_price, :bearer)
   end
 
@@ -10,8 +12,7 @@ class StocksController < ApplicationController
   def create
     @stock = Stock.new(stock_params)
     if @stock.save
-      # Was using render :show, but RSpec gave me issues
-      render "stocks/show.json.jbuilder", status: :created
+      render :show, status: :created
     else
       render_error
     end
@@ -20,8 +21,16 @@ class StocksController < ApplicationController
   def update
     @stock = Stock.find(params[:id])
     if @stock.update(stock_params)
-      # Was using render :show, but RSpec gave me issues
-      render "stocks/show.json.jbuilder", status: :ok
+      render :show, status: :ok
+    else
+      render_error
+    end
+  end
+
+  def destroy
+    @stock = Stock.find(params[:id])
+    if @stock.destroy
+      render :index, status: :ok
     else
       render_error
     end

@@ -2,12 +2,20 @@ require 'rails_helper'
 
 RSpec.describe StocksController, type: :controller do
 
+  # I have read testing views in controller isn't best practice, but this seemed simpler
+  render_views
+
   describe "GET /stocks/" do
-    FactoryGirl.build(:stock)
     it "should return list with stocks" do
-      get "stocks", as: :json
+      FactoryGirl.create(:stock)
+      get :index, as: :json
       expect(response).to have_http_status(200)
-      expect(response.body).to eq("hello")
+      expect(JSON.parse(response.body)).to eq([
+        "stock_name"=>"New Stock",
+        "value_cents"=>1939,
+        "currency"=>"EUR",
+        "bearer_name"=>"Me"
+        ])
     end
   end
 
@@ -20,7 +28,12 @@ RSpec.describe StocksController, type: :controller do
         post :create, as: :json, params: params
 
         expect(response).to have_http_status(201)
-        expect(response).to render_template(:show)
+        expect(JSON.parse(response.body)).to eq({
+          "stock_name"=>"Microsoft",
+          "value_cents"=>1939,
+          "currency"=>"EUR",
+          "bearer_name"=>"Billy Bob"
+          })
         expect(Stock.count).to eq(1)
         expect(Bearer.count).to eq(1)
         expect(MarketPrice.count).to eq(1)
@@ -46,22 +59,84 @@ RSpec.describe StocksController, type: :controller do
 
   describe "PATCH /stocks/:id" do
     context "with different bearer" do
-      it "should create new bearer but keep market price"
+
+      it "should create new bearer but keep market price" do
+        FactoryGirl.create(:stock)
+
+        params = { stock: { bearer_name: "doge"}, id: 1}
+
+        patch :update, as: :json, params: params
+
+        expect(response).to have_http_status(200)
+        expect(JSON.parse(response.body)).to eq({
+        "stock_name"=>"New Stock",
+        "value_cents"=>1939,
+        "currency"=>"EUR",
+        "bearer_name"=>"doge"
+        })
+        expect(Stock.count).to eq(1)
+        expect(Bearer.count).to eq(2)
+        expect(MarketPrice.count).to eq(1)
+      end
     end
 
     context "with different market price" do
-      it "should create new market price but keep bearer"
+      it "should create new market price but keep bearer" do
+        FactoryGirl.create(:stock)
+
+        params = { stock: { value_cents: 555, currency: "USD"}, id: 1}
+
+        patch :update, as: :json, params: params
+
+        expect(response).to have_http_status(200)
+        expect(JSON.parse(response.body)).to eq({
+        "stock_name"=>"New Stock",
+        "value_cents"=>555,
+        "currency"=>"USD",
+        "bearer_name"=>"Me"
+        })
+        expect(Stock.count).to eq(1)
+        expect(Bearer.count).to eq(1)
+        expect(MarketPrice.count).to eq(2)
+      end
     end
 
     context "with existing bearer" do
-      it "should reference existing bearer to stock"
+      it "should reference existing bearer to stock" do
+        FactoryGirl.create(:stock)
+        existing_bearer = Bearer.create(name: "Luke Skywalker")
+
+        params = { stock: {bearer_name: "Luke Skywalker"}, id: 1}
+
+        patch :update, as: :json, params: params
+
+        expect(response).to have_http_status(200)
+        expect(JSON.parse(response.body)).to eq({
+        "stock_name"=>"New Stock",
+        "value_cents"=>1939,
+        "currency"=>"EUR",
+        "bearer_name"=>"Luke Skywalker"
+        })
+        expect(Stock.find(1).bearer).to eq(existing_bearer)
+        expect(Stock.count).to eq(1)
+        expect(Bearer.count).to eq(2)
+        expect(MarketPrice.count).to eq(1)
+      end
     end
   end
 
   describe "DELETE /stocks/:id" do
-    context "with different bearer" do
-      it "should create new bearer but keep market price"
+    it "should soft delete the stock" do
+      FactoryGirl.create(:stock)
+
+      params = {id: 1}
+
+      delete :destroy, as: :json, params: params
+
+      expect(response).to have_http_status(200)
+      expect(Stock.count).to eq(0)
+      expect(Bearer.count).to eq(1)
+      expect(MarketPrice.count).to eq(1)
     end
   end
-
 end

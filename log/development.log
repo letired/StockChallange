@@ -4063,3 +4063,98 @@ Completed 404 Not Found in 1ms (ActiveRecord: 0.2ms)
 ActiveRecord::RecordNotFound (Couldn't find Stock with 'id'=8 [WHERE "stocks"."deleted_at" IS NULL]):
   
 app/controllers/stocks_controller.rb:7:in `show'
+Started GET "/stocks/" for 127.0.0.1 at 2017-07-10 16:00:19 +0200
+Processing by StocksController#index as JSON
+  Parameters: {"stock"=>{}}
+  Rendering stocks/index.json.jbuilder
+  [1m[36mStock Load (0.1ms)[0m  [1m[34mSELECT "stocks".* FROM "stocks" WHERE "stocks"."deleted_at" IS NULL[0m
+  [1m[36mMarketPrice Load (0.1ms)[0m  [1m[34mSELECT "market_prices".* FROM "market_prices" WHERE "market_prices"."id" IN (1, 3, 4)[0m
+  [1m[36mBearer Load (0.1ms)[0m  [1m[34mSELECT "bearers".* FROM "bearers" WHERE "bearers"."id" IN (1, 2, 3, 4)[0m
+  Rendered stocks/index.json.jbuilder (17.7ms)
+Completed 200 OK in 20ms (Views: 17.9ms | ActiveRecord: 1.8ms)
+
+
+Started GET "/stocks/6" for 127.0.0.1 at 2017-07-10 16:02:04 +0200
+Processing by StocksController#show as JSON
+  Parameters: {"id"=>"6", "stock"=>{}}
+  [1m[36mStock Load (0.1ms)[0m  [1m[34mSELECT  "stocks".* FROM "stocks" WHERE "stocks"."deleted_at" IS NULL AND "stocks"."id" = ? LIMIT ?[0m  [["id", 6], ["LIMIT", 1]]
+  Rendering stocks/show.json.jbuilder
+  [1m[36mMarketPrice Load (0.1ms)[0m  [1m[34mSELECT  "market_prices".* FROM "market_prices" WHERE "market_prices"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mBearer Load (0.2ms)[0m  [1m[34mSELECT  "bearers".* FROM "bearers" WHERE "bearers"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  Rendered stocks/show.json.jbuilder (3.5ms)
+Completed 200 OK in 7ms (Views: 4.4ms | ActiveRecord: 0.4ms)
+
+
+Started PATCH "/stocks/1" for 127.0.0.1 at 2017-07-10 17:10:02 +0200
+Processing by StocksController#update as JSON
+  Parameters: {"stock"=>{"bearer_name"=>"spencer"}, "id"=>"1"}
+  [1m[36mStock Load (0.1ms)[0m  [1m[34mSELECT  "stocks".* FROM "stocks" WHERE "stocks"."deleted_at" IS NULL AND "stocks"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mBearer Load (0.1ms)[0m  [1m[34mSELECT  "bearers".* FROM "bearers" WHERE "bearers"."name" = ? ORDER BY "bearers"."id" ASC LIMIT ?[0m  [["name", "spencer"], ["LIMIT", 1]]
+  [1m[36mMarketPrice Load (0.1ms)[0m  [1m[34mSELECT  "market_prices".* FROM "market_prices" WHERE "market_prices"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35mSQL (0.8ms)[0m  [1m[33mUPDATE "stocks" SET "bearer_id" = ?, "updated_at" = ? WHERE "stocks"."id" = ?[0m  [["bearer_id", 4], ["updated_at", "2017-07-10 15:10:02.797903"], ["id", 1]]
+  [1m[35m (6.8ms)[0m  [1m[36mcommit transaction[0m
+  Rendering stocks/show.json.jbuilder
+  Rendered stocks/show.json.jbuilder (0.4ms)
+Completed 200 OK in 15ms (Views: 1.8ms | ActiveRecord: 7.9ms)
+
+
+Started PATCH "/stocks/1" for 127.0.0.1 at 2017-07-10 17:10:27 +0200
+Processing by StocksController#update as JSON
+  Parameters: {"stock"=>{"bearer_name"=>"johnny"}, "id"=>"1"}
+  [1m[36mStock Load (0.1ms)[0m  [1m[34mSELECT  "stocks".* FROM "stocks" WHERE "stocks"."deleted_at" IS NULL AND "stocks"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mBearer Load (0.1ms)[0m  [1m[34mSELECT  "bearers".* FROM "bearers" WHERE "bearers"."name" = ? ORDER BY "bearers"."id" ASC LIMIT ?[0m  [["name", "johnny"], ["LIMIT", 1]]
+  [1m[36mBearer Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "bearers" WHERE "bearers"."name" = ? LIMIT ?[0m  [["name", "johnny"], ["LIMIT", 1]]
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "bearers" ("name", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["name", "johnny"], ["created_at", "2017-07-10 15:10:27.802133"], ["updated_at", "2017-07-10 15:10:27.802133"]]
+  [1m[36mMarketPrice Load (0.1ms)[0m  [1m[34mSELECT  "market_prices".* FROM "market_prices" WHERE "market_prices"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35mSQL (0.1ms)[0m  [1m[33mUPDATE "stocks" SET "bearer_id" = ?, "updated_at" = ? WHERE "stocks"."id" = ?[0m  [["bearer_id", 5], ["updated_at", "2017-07-10 15:10:27.805064"], ["id", 1]]
+  [1m[35m (7.1ms)[0m  [1m[36mcommit transaction[0m
+  Rendering stocks/show.json.jbuilder
+  Rendered stocks/show.json.jbuilder (0.6ms)
+Completed 200 OK in 19ms (Views: 2.9ms | ActiveRecord: 8.2ms)
+
+
+Started PATCH "/stocks/1" for 127.0.0.1 at 2017-07-10 17:10:32 +0200
+Processing by StocksController#update as JSON
+  Parameters: {"stock"=>{"bearer_name"=>"spencer"}, "id"=>"1"}
+  [1m[36mStock Load (0.1ms)[0m  [1m[34mSELECT  "stocks".* FROM "stocks" WHERE "stocks"."deleted_at" IS NULL AND "stocks"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mBearer Load (0.2ms)[0m  [1m[34mSELECT  "bearers".* FROM "bearers" WHERE "bearers"."name" = ? ORDER BY "bearers"."id" ASC LIMIT ?[0m  [["name", "spencer"], ["LIMIT", 1]]
+  [1m[36mMarketPrice Load (0.1ms)[0m  [1m[34mSELECT  "market_prices".* FROM "market_prices" WHERE "market_prices"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35mSQL (0.1ms)[0m  [1m[33mUPDATE "stocks" SET "bearer_id" = ?, "updated_at" = ? WHERE "stocks"."id" = ?[0m  [["bearer_id", 4], ["updated_at", "2017-07-10 15:10:32.765228"], ["id", 1]]
+  [1m[35m (7.2ms)[0m  [1m[36mcommit transaction[0m
+  Rendering stocks/show.json.jbuilder
+  Rendered stocks/show.json.jbuilder (0.5ms)
+Completed 200 OK in 16ms (Views: 2.6ms | ActiveRecord: 7.7ms)
+
+
+Started PATCH "/stocks/1" for 127.0.0.1 at 2017-07-10 17:11:08 +0200
+Processing by StocksController#update as JSON
+  Parameters: {"stock"=>{"value_cents"=>"100"}, "id"=>"1"}
+  [1m[36mStock Load (0.1ms)[0m  [1m[34mSELECT  "stocks".* FROM "stocks" WHERE "stocks"."deleted_at" IS NULL AND "stocks"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mBearer Load (0.1ms)[0m  [1m[34mSELECT  "bearers".* FROM "bearers" WHERE "bearers"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mMarketPrice Load (0.1ms)[0m  [1m[34mSELECT  "market_prices".* FROM "market_prices" WHERE "market_prices"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (0.0ms)[0m  [1m[36mcommit transaction[0m
+  Rendering stocks/show.json.jbuilder
+  Rendered stocks/show.json.jbuilder (0.4ms)
+Completed 200 OK in 6ms (Views: 1.8ms | ActiveRecord: 0.4ms)
+
+
+Started PATCH "/stocks/1" for 127.0.0.1 at 2017-07-10 17:11:50 +0200
+Processing by StocksController#update as JSON
+  Parameters: {"stock"=>{"value_cents"=>"100", "currency"=>"USD"}, "id"=>"1"}
+  [1m[36mStock Load (0.1ms)[0m  [1m[34mSELECT  "stocks".* FROM "stocks" WHERE "stocks"."deleted_at" IS NULL AND "stocks"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mMarketPrice Load (0.1ms)[0m  [1m[34mSELECT  "market_prices".* FROM "market_prices" WHERE "market_prices"."value_cents" = ? AND "market_prices"."currency" = ? ORDER BY "market_prices"."id" ASC LIMIT ?[0m  [["value_cents", 100], ["currency", "USD"], ["LIMIT", 1]]
+  [1m[36mMarketPrice Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "market_prices" WHERE "market_prices"."currency" = ? AND "market_prices"."value_cents" = ? LIMIT ?[0m  [["currency", "USD"], ["value_cents", 100], ["LIMIT", 1]]
+  [1m[35mSQL (0.9ms)[0m  [1m[32mINSERT INTO "market_prices" ("currency", "value_cents", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["currency", "USD"], ["value_cents", 100], ["created_at", "2017-07-10 15:11:50.213324"], ["updated_at", "2017-07-10 15:11:50.213324"]]
+  [1m[36mBearer Load (0.1ms)[0m  [1m[34mSELECT  "bearers".* FROM "bearers" WHERE "bearers"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[35mSQL (0.2ms)[0m  [1m[33mUPDATE "stocks" SET "market_price_id" = ?, "updated_at" = ? WHERE "stocks"."id" = ?[0m  [["market_price_id", 5], ["updated_at", "2017-07-10 15:11:50.217071"], ["id", 1]]
+  [1m[35m (8.1ms)[0m  [1m[36mcommit transaction[0m
+  Rendering stocks/show.json.jbuilder
+  Rendered stocks/show.json.jbuilder (0.4ms)
+Completed 200 OK in 21ms (Views: 2.6ms | ActiveRecord: 9.7ms)
+
+
