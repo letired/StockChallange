@@ -4158,3 +4158,143 @@ Processing by StocksController#update as JSON
 Completed 200 OK in 21ms (Views: 2.6ms | ActiveRecord: 9.7ms)
 
 
+Started DELETE "/stocks/1" for 127.0.0.1 at 2017-07-10 17:48:07 +0200
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by StocksController#destroy as JSON
+  Parameters: {"id"=>"1", "stock"=>{}}
+  [1m[36mStock Load (0.1ms)[0m  [1m[34mSELECT  "stocks".* FROM "stocks" WHERE "stocks"."deleted_at" IS NULL AND "stocks"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[33mUPDATE "stocks" SET "deleted_at" = '2017-07-10 15:48:07.740443', "updated_at" = '2017-07-10 15:48:07.740474' WHERE "stocks"."id" = ?[0m  [["id", 1]]
+  [1m[35m (6.7ms)[0m  [1m[36mcommit transaction[0m
+  Rendering stocks/index.json.jbuilder
+  Rendered stocks/index.json.jbuilder (1.7ms)
+Completed 200 OK in 21ms (Views: 6.5ms | ActiveRecord: 7.6ms)
+
+
+Started GET "/stocks/1" for 127.0.0.1 at 2017-07-10 17:53:04 +0200
+Processing by StocksController#show as JSON
+  Parameters: {"id"=>"1", "stock"=>{}}
+  [1m[36mStock Load (0.1ms)[0m  [1m[34mSELECT  "stocks".* FROM "stocks" WHERE "stocks"."deleted_at" IS NULL AND "stocks"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+Completed 404 Not Found in 2ms (ActiveRecord: 0.8ms)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find Stock with 'id'=1 [WHERE "stocks"."deleted_at" IS NULL]):
+  
+app/controllers/stocks_controller.rb:10:in `show'
+Started GET "/stocks/2" for 127.0.0.1 at 2017-07-10 17:53:13 +0200
+Processing by StocksController#show as JSON
+  Parameters: {"id"=>"2", "stock"=>{}}
+  [1m[36mStock Load (0.1ms)[0m  [1m[34mSELECT  "stocks".* FROM "stocks" WHERE "stocks"."deleted_at" IS NULL AND "stocks"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  Rendering stocks/show.json.jbuilder
+  [1m[36mMarketPrice Load (0.1ms)[0m  [1m[34mSELECT  "market_prices".* FROM "market_prices" WHERE "market_prices"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mBearer Load (0.1ms)[0m  [1m[34mSELECT  "bearers".* FROM "bearers" WHERE "bearers"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  Rendered stocks/show.json.jbuilder (18.8ms)
+Completed 200 OK in 25ms (Views: 19.3ms | ActiveRecord: 1.1ms)
+
+
+Started POST "/stocks/" for 127.0.0.1 at 2017-07-10 17:54:35 +0200
+Processing by StocksController#create as JSON
+  Parameters: {"stock"=>{"name"=>"Microsoft", "value_cents"=>1939, "currency"=>"EUR", "bearer_name"=>"Spencer"}}
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mBearer Load (0.1ms)[0m  [1m[34mSELECT  "bearers".* FROM "bearers" WHERE "bearers"."name" = ? ORDER BY "bearers"."id" ASC LIMIT ?[0m  [["name", "Spencer"], ["LIMIT", 1]]
+  [1m[36mBearer Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "bearers" WHERE "bearers"."name" = ? LIMIT ?[0m  [["name", "Spencer"], ["LIMIT", 1]]
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "bearers" ("name", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["name", "Spencer"], ["created_at", "2017-07-10 15:54:35.637516"], ["updated_at", "2017-07-10 15:54:35.637516"]]
+  [1m[36mMarketPrice Load (0.1ms)[0m  [1m[34mSELECT  "market_prices".* FROM "market_prices" WHERE "market_prices"."value_cents" = ? AND "market_prices"."currency" = ? ORDER BY "market_prices"."id" ASC LIMIT ?[0m  [["value_cents", 1939], ["currency", "EUR"], ["LIMIT", 1]]
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO "stocks" ("name", "bearer_id", "market_price_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["name", "Microsoft"], ["bearer_id", 6], ["market_price_id", 4], ["created_at", "2017-07-10 15:54:35.639997"], ["updated_at", "2017-07-10 15:54:35.639997"]]
+  [1m[35m (7.2ms)[0m  [1m[36mcommit transaction[0m
+  Rendering stocks/show.json.jbuilder
+  Rendered stocks/show.json.jbuilder (0.4ms)
+Completed 201 Created in 24ms (Views: 1.7ms | ActiveRecord: 8.0ms)
+
+
+Started GET "/stocks/" for 127.0.0.1 at 2017-07-10 18:15:26 +0200
+Processing by StocksController#index as JSON
+  Parameters: {"stock"=>{}}
+  Rendering stocks/index.json.jbuilder
+  [1m[36mStock Load (0.1ms)[0m  [1m[34mSELECT "stocks".* FROM "stocks" WHERE "stocks"."deleted_at" IS NULL[0m
+  [1m[36mMarketPrice Load (0.2ms)[0m  [1m[34mSELECT "market_prices".* FROM "market_prices" WHERE "market_prices"."id" IN (1, 3, 4)[0m
+  [1m[36mBearer Load (0.1ms)[0m  [1m[34mSELECT "bearers".* FROM "bearers" WHERE "bearers"."id" IN (2, 3, 1, 4, 6)[0m
+  Rendered stocks/index.json.jbuilder (5.9ms)
+Completed 200 OK in 8ms (Views: 6.8ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/stocks/" for 127.0.0.1 at 2017-07-10 18:19:33 +0200
+Processing by StocksController#index as JSON
+  Parameters: {"stock"=>{}}
+  Rendering stocks/index.json.jbuilder
+  [1m[36mStock Load (0.1ms)[0m  [1m[34mSELECT "stocks".* FROM "stocks" WHERE "stocks"."deleted_at" IS NULL[0m
+  [1m[36mMarketPrice Load (0.1ms)[0m  [1m[34mSELECT "market_prices".* FROM "market_prices" WHERE "market_prices"."id" IN (1, 3, 4)[0m
+  [1m[36mBearer Load (0.1ms)[0m  [1m[34mSELECT "bearers".* FROM "bearers" WHERE "bearers"."id" IN (2, 3, 1, 4, 6)[0m
+  Rendered stocks/index.json.jbuilder (4.5ms)
+Completed 500 Internal Server Error in 7ms (ActiveRecord: 0.4ms)
+
+
+  
+ActionView::Template::Error (undefined method `market_price' for nil:NilClass):
+    1: json.array! @stocks do |stock|
+    2:   json.stock_name stock.name
+    3:   json.market_price do
+    4:     json.value_cents @stock.market_price.value_cents
+    5:     json.currency @stock.market_price.currency
+    6:   end
+    7:   json.bearer_name stock.bearer.name
+  
+app/views/stocks/index.json.jbuilder:4:in `block (2 levels) in _app_views_stocks_index_json_jbuilder___4064498592823216625_47033803280980'
+app/views/stocks/index.json.jbuilder:3:in `block in _app_views_stocks_index_json_jbuilder___4064498592823216625_47033803280980'
+app/views/stocks/index.json.jbuilder:1:in `_app_views_stocks_index_json_jbuilder___4064498592823216625_47033803280980'
+Started GET "/stocks/" for 127.0.0.1 at 2017-07-10 18:20:08 +0200
+Processing by StocksController#index as JSON
+  Parameters: {"stock"=>{}}
+  Rendering stocks/index.json.jbuilder
+  [1m[36mStock Load (0.1ms)[0m  [1m[34mSELECT "stocks".* FROM "stocks" WHERE "stocks"."deleted_at" IS NULL[0m
+  [1m[36mMarketPrice Load (0.1ms)[0m  [1m[34mSELECT "market_prices".* FROM "market_prices" WHERE "market_prices"."id" IN (1, 3, 4)[0m
+  [1m[36mBearer Load (0.1ms)[0m  [1m[34mSELECT "bearers".* FROM "bearers" WHERE "bearers"."id" IN (2, 3, 1, 4, 6)[0m
+  Rendered stocks/index.json.jbuilder (3.4ms)
+Completed 200 OK in 6ms (Views: 4.4ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/stocks/" for 127.0.0.1 at 2017-07-10 18:21:58 +0200
+Processing by StocksController#index as JSON
+  Parameters: {"stock"=>{}}
+  Rendering stocks/index.json.jbuilder
+  [1m[36mStock Load (0.1ms)[0m  [1m[34mSELECT "stocks".* FROM "stocks" WHERE "stocks"."deleted_at" IS NULL[0m
+  [1m[36mMarketPrice Load (0.2ms)[0m  [1m[34mSELECT "market_prices".* FROM "market_prices" WHERE "market_prices"."id" IN (1, 3, 4)[0m
+  [1m[36mBearer Load (0.1ms)[0m  [1m[34mSELECT "bearers".* FROM "bearers" WHERE "bearers"."id" IN (2, 3, 1, 4, 6)[0m
+  Rendered stocks/index.json.jbuilder (4.7ms)
+Completed 200 OK in 7ms (Views: 5.7ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/stocks/" for 127.0.0.1 at 2017-07-10 18:22:56 +0200
+Processing by StocksController#index as JSON
+  Parameters: {"stock"=>{}}
+  Rendering stocks/index.json.jbuilder
+  [1m[36mStock Load (0.1ms)[0m  [1m[34mSELECT "stocks".* FROM "stocks" WHERE "stocks"."deleted_at" IS NULL[0m
+  [1m[36mMarketPrice Load (0.1ms)[0m  [1m[34mSELECT "market_prices".* FROM "market_prices" WHERE "market_prices"."id" IN (1, 3, 4)[0m
+  [1m[36mBearer Load (0.1ms)[0m  [1m[34mSELECT "bearers".* FROM "bearers" WHERE "bearers"."id" IN (2, 3, 1, 4, 6)[0m
+  Rendered stocks/index.json.jbuilder (4.3ms)
+Completed 200 OK in 6ms (Views: 5.1ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/stocks/" for 127.0.0.1 at 2017-07-10 18:24:27 +0200
+Processing by StocksController#index as JSON
+  Parameters: {"stock"=>{}}
+  Rendering stocks/index.json.jbuilder
+  [1m[36mStock Load (0.1ms)[0m  [1m[34mSELECT "stocks".* FROM "stocks" WHERE "stocks"."deleted_at" IS NULL[0m
+  [1m[36mMarketPrice Load (0.1ms)[0m  [1m[34mSELECT "market_prices".* FROM "market_prices" WHERE "market_prices"."id" IN (1, 3, 4)[0m
+  [1m[36mBearer Load (0.1ms)[0m  [1m[34mSELECT "bearers".* FROM "bearers" WHERE "bearers"."id" IN (2, 3, 1, 4, 6)[0m
+  Rendered stocks/index.json.jbuilder (4.3ms)
+Completed 200 OK in 6ms (Views: 5.3ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/stocks/" for 127.0.0.1 at 2017-07-10 18:25:45 +0200
+Processing by StocksController#index as JSON
+  Parameters: {"stock"=>{}}
+  Rendering stocks/index.json.jbuilder
+  [1m[36mStock Load (0.2ms)[0m  [1m[34mSELECT "stocks".* FROM "stocks" WHERE "stocks"."deleted_at" IS NULL[0m
+  [1m[36mMarketPrice Load (0.2ms)[0m  [1m[34mSELECT "market_prices".* FROM "market_prices" WHERE "market_prices"."id" IN (1, 3, 4)[0m
+  [1m[36mBearer Load (0.1ms)[0m  [1m[34mSELECT "bearers".* FROM "bearers" WHERE "bearers"."id" IN (2, 3, 1, 4, 6)[0m
+  Rendered stocks/index.json.jbuilder (4.3ms)
+Completed 200 OK in 6ms (Views: 5.1ms | ActiveRecord: 0.4ms)
+
+

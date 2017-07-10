@@ -25,3 +25,6 @@ Error responses should be detailed in a way that they explain what exactly is mi
 Reflect the explained logic and endpoints in rspec tests.
 
 Bonne chance and feel free to ask questions when you get totally stuck.
+
+### Finished Test:
+

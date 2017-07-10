@@ -7,15 +7,25 @@ RSpec.describe StocksController, type: :controller do
 
   describe "GET /stocks/" do
     it "should return list with stocks" do
-      FactoryGirl.create(:stock)
+      @subject = FactoryGirl.create(:stock)
       get :index, as: :json
       expect(response).to have_http_status(200)
       expect(JSON.parse(response.body)).to eq([
-        "stock_name"=>"New Stock",
-        "value_cents"=>1939,
-        "currency"=>"EUR",
-        "bearer_name"=>"Me"
-        ])
+    {
+        "stock"=>{
+            "id"=>1,
+            "name"=>"New Stock"
+        },
+        "market_price"=>{
+            "id"=>1,
+            "value_cents"=>1939,
+            "currency"=>"EUR"
+        },
+        "bearer"=>{
+            "id"=>1,
+            "name"=>"Me"
+        }
+    }])
     end
   end
 

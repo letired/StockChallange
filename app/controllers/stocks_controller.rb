@@ -1,7 +1,8 @@
 class StocksController < ApplicationController
-  def index
+
     # This style of loading will load the relevant data for market price and bearer as well,
     # no more N+1!  I couldn't figure out how to do this in a single SQL query though.
+  def index
     @stocks = Stock.all.includes(:market_price, :bearer)
   end
 
@@ -27,6 +28,7 @@ class StocksController < ApplicationController
     end
   end
 
+  # Using the soft delete gem paranoia, this just adds a deleted_at timestamp
   def destroy
     @stock = Stock.find(params[:id])
     if @stock.destroy
