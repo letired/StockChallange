@@ -65,6 +65,20 @@ RSpec.describe StocksController, type: :controller do
 
       end
     end
+
+    context "with no currency value" do
+      it "should return 422 and fail to save" do
+        params = { stock: { name: "Microsoft", bearer_name: "Spencer", value_cents: 800} }
+
+        post :create, as: :json, params: params
+
+        expect(response).to have_http_status(422)
+        expect(JSON.parse(response.body)).to eq("errors" => {"market_price"=>["must exist"]})
+        expect(Stock.count).to eq(0)
+        expect(Bearer.count).to eq(0)
+        expect(MarketPrice.count).to eq(0)
+      end
+    end
   end
 
   describe "PATCH /stocks/:id" do
@@ -110,6 +124,27 @@ RSpec.describe StocksController, type: :controller do
         expect(MarketPrice.count).to eq(2)
       end
     end
+
+    context "with just value_cents and no currency" do
+      it "should use previous currency associated with stock, and create new market price" do
+          FactoryGirl.create(:stock)
+
+          params = { stock: { value_cents: 555}, id: 1}
+
+          patch :update, as: :json, params: params
+
+          expect(response).to have_http_status(200)
+          expect(JSON.parse(response.body)).to eq({
+          "stock_name"=>"New Stock",
+          "value_cents"=>555,
+          "currency"=>"EUR",
+          "bearer_name"=>"Me"
+          })
+          expect(Stock.count).to eq(1)
+          expect(Bearer.count).to eq(1)
+          expect(MarketPrice.count).to eq(2)
+        end
+      end
 
     context "with existing bearer" do
       it "should reference existing bearer to stock" do

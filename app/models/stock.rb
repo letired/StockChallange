@@ -27,8 +27,15 @@ class Stock < ApplicationRecord
   end
 
   def set_market_price
+    set_currency
     if self.value_cents && self.currency
       self.market_price = MarketPrice.where(value_cents: self.value_cents, currency: self.currency).first_or_create
+    end
+  end
+
+  def set_currency
+    if self.currency.nil?
+      self.currency = self.try(:market_price).try(:currency)
     end
   end
 end
